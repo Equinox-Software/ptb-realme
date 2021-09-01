@@ -14,11 +14,9 @@ def clear(update: Update, context: CallbackContext):
     context.bot.delete_my_commands(BotCommandScopeChat(SUPPORT_GROUP))
     context.bot.delete_my_commands(BotCommandScopeChat(OFFTOPIC_GROUP))
 
-    context.bot.set_my_commands(
-        [
-            ('clear', 'Clears commands and temporary user data.'),
-            ('reset', 'Resets commands. Use if after clearing.')
-        ],
+    context.bot.set_my_commands([
+        ('clear', 'Clears commands and temporary user data.'),
+        ('reset', 'Resets commands. Use if after clearing.')],
         scope=BotCommandScopeChat(CONTROL_GROUP)
     )
 
@@ -70,13 +68,17 @@ def reset(update: Update, context: CallbackContext):
         ('admins', 'Show this group\'s staff 👷‍♂️'),
         ('ask', 'How to ask questions properly ❓'),
         ('help', 'Show commands 🆘'),
+        ('realistic', 'If people expect to much.'),
+        ('banana', 'Where update?'),
         ('rant', 'Why updates don\'t have dates.'),
         ('offtopic', 'Move messages to Off-Topic ➡️')],
         scope=BotCommandScopeChatAdministrators(SUPPORT_GROUP))
 
     context.bot.set_my_commands([
         ('rules', 'Show this group\'s rules 📜'),
-        ('cool', 'Cool and useful Apps 😎')],
+        ('cool', 'Cool and useful Apps 😎'),
+        ('gcam', 'Latest release and configurations 📷'),
+        ('cleaners', 'The recommended cleaning apps ♻️')],
         scope=BotCommandScopeChat(OFFTOPIC_GROUP))
 
     context.bot.set_my_commands([
@@ -84,12 +86,13 @@ def reset(update: Update, context: CallbackContext):
         ('cool', 'Cool and useful Apps 😎'),
         ('gcam', 'Latest release and configurations 📷'),
         ('cleaners', 'The recommended cleaning apps ♻️'),
+        ('banana', 'Where update?'),
         ('support', 'Move messages to the Support-Group ➡️')],
         scope=BotCommandScopeChatAdministrators(OFFTOPIC_GROUP))
 
     # add Contribute/About and a specific message to join the groups here
-    context.bot.set_my_commands([
-        ('rules', 'Show this group\'s rules 📜')],
-        scope=BotCommandScope.ALL_PRIVATE_CHATS)
+    #  context.bot.set_my_commands([
+    #  ('rules', 'Show this group\'s rules 📜')],
+    #  scope=BotCommandScope.ALL_PRIVATE_CHATS)
 
     update.message.reply_text("Command list was updated.")

@@ -7,4 +7,4 @@ bs4==0.0.1
 lxml
 beautifulsoup4==4.9.3
 bios~=0.1.2
-googletrans
+translators==4.9.5

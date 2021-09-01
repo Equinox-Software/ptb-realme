@@ -299,7 +299,7 @@ def whatsapp(update: Update, context: CallbackContext):
 
 
 def move_to_offtopic(update: Update, context: CallbackContext):
-    if update.message.reply_to_message and update.message.from_user in ADMINS:
+    if update.message.reply_to_message is not None and update.message.from_user.id in ADMINS:
         update.message.delete()
         original_msg = update.message.reply_to_message.copy(OFFTOPIC_GROUP, reply_markup=InlineKeyboardMarkup(
             [[InlineKeyboardButton(text="Original Message ➡️",

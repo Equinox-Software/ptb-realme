@@ -1,12 +1,13 @@
 import re
 import time
+import translators
 
 from telegram import Update, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
 
 from config import VERIFIED_USERS, CONTROL_GROUP
 from constants import MODELS
-from main import SUPPORT_GROUP, OFFTOPIC_GROUP, ADMINS, translator
+from main import SUPPORT_GROUP, OFFTOPIC_GROUP, ADMINS
 from utils import delay_group, now, message_button_url
 
 
@@ -165,6 +166,26 @@ def admin(update: Update, context: CallbackContext):
         update.message.reply_to_message.reply_text("Choose how long to remove this user:", reply_markup=keyboard)
 
 
+def banana(update: Update, _: CallbackContext):
+    update.message.delete()
+
+    if update.message.reply_to_message is not None:
+        update.message.reply_to_message.reply_photo(open('resources/where_update.jpg', 'rb'))
+
+
+def realistic(update: Update, _: CallbackContext):
+    update.message.delete()
+
+    if update.message.reply_to_message is not None:
+        update.message.reply_to_message.reply_text("Calm down... you almost sound like this:"
+                                                   "\n\nREALME BED COMPANI!! WHERE MY ANDROID 14!!! ONLY 87FPS BGMI!! WHERE 90FPS 4K ULTRA???? MY PHONE ONLY 3 YEAR OLD!! WHERE RAM EXPAND FEATURE??? WHY NO UPDATE FOR NEXT DECADE??? WHY AOD-CUSTOMIZATION NOT WORK IN MY LCD DEVICE??? WE WANT ANDROID 14!!! NOW!!!"
+                                                   "\n\nBe realistic.. Realme does the best they already can.")
+
+
+def nice(update: Update, _: CallbackContext):
+    update.message.reply_text("nice")
+
+
 def polls(update: Update, context: CallbackContext):
     update.message.delete()
     current_time = now()
@@ -233,6 +254,8 @@ def polls(update: Update, context: CallbackContext):
 
 
 def translate(update: Update, context: CallbackContext):
+    update.message.delete()
+
     if update.message.reply_to_message is not None:
 
         if len(context.args) == 0 or len(context.args) > 2:
@@ -261,8 +284,10 @@ def translate(update: Update, context: CallbackContext):
                 return
 
             update.message.reply_to_message.reply_text(
-                "Translation ({} ➜ {})\n\n{}".format(from_language, to_language, translator.translate(text_translation, src=from_language,dest=to_language)["text"],
-                ParseMode.HTML))
+                "Translation ({} ➜ {})\n\n{}".format(from_language, to_language,
+                                                     translators.deepl(text_translation, from_language=from_language,
+                                                                       to_language=to_language)),
+                ParseMode.HTML)
 
     else:
         context.bot.send_message(

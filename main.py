@@ -52,9 +52,17 @@ if __name__ == '__main__':
     for i in FORBIDDEN_TEXT:
         dp.add_handler(MessageHandler(Filters.regex(r"(?i)" + i), remove_message))
 
+    # General
+    dp.add_handler(CommandHandler("gcam", gcam))
+    dp.add_handler(CommandHandler("cleaners", cleaners))
+    dp.add_handler(CommandHandler("polls", polls))
+    dp.add_handler(CommandHandler("rules", rules))
+    dp.add_handler(CommandHandler("cool", cool))
+    dp.add_handler(CommandHandler("translate", translate))
+    dp.add_handler(MessageHandler(Filters.regex(r"(?i)rmx\d{4}"), rmx))
+
+    # Support
     dp.add_handler(CommandHandler("android11", android11, Filters.chat(SUPPORT_GROUP)))
-    dp.add_handler(CommandHandler("gcam", gcam, Filters.chat(SUPPORT_GROUP)))
-    dp.add_handler(CommandHandler("cleaners", cleaners, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("help", commands, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("admins", admins, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("experts", experts, Filters.chat(SUPPORT_GROUP)))
@@ -68,33 +76,30 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("manual", manual, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("support", move_to_support, Filters.chat(OFFTOPIC_GROUP)))
     dp.add_handler(CommandHandler("offtopic", move_to_offtopic, Filters.chat(SUPPORT_GROUP)))
-    dp.add_handler(CommandHandler("polls", polls))
-    dp.add_handler(CommandHandler("rules", rules))
-    dp.add_handler(CommandHandler("cool", cool))
     dp.add_handler(CommandHandler("bug", bug, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("stable", stable, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("push", push, Filters.chat(SUPPORT_GROUP)))
-    dp.add_handler(CommandHandler("translate", translate))
-    dp.add_handler(MessageHandler(Filters.regex(r"(?i)rmx\d{4}"), rmx))
 
     # Personal opinion
     dp.add_handler(CommandHandler("ram", ram, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("rant", rant, Filters.chat(SUPPORT_GROUP)))
 
     # Upcoming
-    dp.add_handler(CommandHandler("warn", warn))  # Filters.chat(OFFTOPIC_GROUP) & Filters.user(ADMINS)))
+    dp.add_handler(CommandHandler("warn", warn, Filters.chat(OFFTOPIC_GROUP) & Filters.user(ADMINS)))
     dp.add_handler(CommandHandler("ban", ban, Filters.chat(OFFTOPIC_GROUP) & Filters.user(ADMINS)))
     dp.add_handler(MessageHandler(Filters.text("@admin"), admin))
     dp.add_handler(CallbackQueryHandler(remove_click, pattern="BAN_remove"))
     dp.add_handler(CallbackQueryHandler(button_click))
 
+    # Control
     dp.add_handler(CommandHandler("reset", reset, Filters.chat(CONTROL_GROUP) & Filters.user(ADMINS)))
     dp.add_handler(CommandHandler("clear", clear, Filters.chat(CONTROL_GROUP) & Filters.user(ADMINS)))
-    dp.add_handler(MessageHandler(Filters.chat_type.private, private_not_available))
-    #  add commands below. follow this scheme:  "command", function
 
-    # add commands above this comment
-    #dp.add_error_handler(error)  # comment this one out for full stacktrace
+    # Private
+    dp.add_handler(MessageHandler(Filters.chat_type.private, private_not_available))
+
+    # Commands have to be added above
+    # dp.add_error_handler(error)  # comment this one out for full stacktrace
 
     updater.start_webhook("0.0.0.0", PORT, TOKEN, webhook_url='https://ptb-realme.herokuapp.com/' + TOKEN)
     updater.idle()

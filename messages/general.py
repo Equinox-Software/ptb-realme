@@ -239,7 +239,7 @@ def translate(update: Update, context: CallbackContext):
             context.bot.send_message(
                 update.message.chat_id,
                 "Please supply a language-code, for example <code>/translate de</code> to translate from German "
-                "to English or <code>/translate en it</code> to translate from English to Italian.")
+                "to English or <code>/translate en it</code> to translate from English to Italian.", ParseMode.HTML)
         else:
             from_language = context.args[0].lower()
 

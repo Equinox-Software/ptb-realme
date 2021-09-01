@@ -6,7 +6,7 @@ from telegram.ext import CallbackContext
 
 from config import VERIFIED_USERS, CONTROL_GROUP
 from constants import MODELS
-from main import SUPPORT_GROUP, OFFTOPIC_GROUP, ADMINS, language_translator
+from main import SUPPORT_GROUP, OFFTOPIC_GROUP, ADMINS
 from utils import delay_group, now, message_button_url
 
 

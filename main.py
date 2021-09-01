@@ -1,7 +1,7 @@
 import logging
 
 from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
-from ibm_watson import LanguageTranslatorV3
+from googletrans import Translator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler
@@ -24,8 +24,7 @@ from utils import remove_message
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-language_translator = LanguageTranslatorV3('2018-05-01', IAMAuthenticator(TRANSLATE_AUTH))
-language_translator.set_service_url(TRANSLATE_URL)
+translator = Translator()
 
 
 def start_session() -> scoped_session:

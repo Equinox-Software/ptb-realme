@@ -260,11 +260,9 @@ def translate(update: Update, context: CallbackContext):
                     "<code>/translate en it</code> to translate from English to Italian.", ParseMode.HTML)
                 return
 
-            update.message.reply_text(
-                "<u>Translation</u>\n{} → {}\n\n".format(from_language, to_language) + language_translator.translate(
-                    text=text_translation,
-                    model_id=from_language + '-' + to_language).get_result()['translations'][0]['translation'],
-                ParseMode.HTML)
+            update.message.reply_to_message.reply_text(
+                "{} → {}\n\n{}".format(from_language, to_language, translator.translate(text_translation, src=from_language,dest=to_language)["text"],
+                ParseMode.HTML))
 
     else:
         context.bot.send_message(

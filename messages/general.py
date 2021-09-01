@@ -261,7 +261,7 @@ def translate(update: Update, context: CallbackContext):
                 return
 
             update.message.reply_to_message.reply_text(
-                "{} → {}\n\n{}".format(from_language, to_language, translator.translate(text_translation, src=from_language,dest=to_language)["text"],
+                "Translation ({} ➜ {})\n\n{}".format(from_language, to_language, translator.translate(text_translation, src=from_language,dest=to_language)["text"],
                 ParseMode.HTML))
 
     else:

@@ -69,7 +69,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("benchmark", benchmark, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("aod", aod, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("manual", manual, Filters.chat(SUPPORT_GROUP)))
-    dp.add_handler(CommandHandler("offtopic", move_to_offtopic, Filters.chat(SUPPORT_GROUP)& Filters.user(ADMINS)))
+    dp.add_handler(CommandHandler("offtopic", move_to_offtopic, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("bug", bug, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("stable", stable, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("push", push, Filters.chat(SUPPORT_GROUP)))
@@ -80,7 +80,7 @@ if __name__ == '__main__':
 
     # Offtopic
     dp.add_handler(CommandHandler("translate", translate, Filters.chat(OFFTOPIC_GROUP)))
-    dp.add_handler(CommandHandler("support", move_to_support, Filters.chat(OFFTOPIC_GROUP)& Filters.user(ADMINS)))
+    dp.add_handler(CommandHandler("support", move_to_support, Filters.chat(OFFTOPIC_GROUP)))
 
     # Upcoming
     dp.add_handler(CommandHandler("warn", warn, Filters.chat(OFFTOPIC_GROUP) & Filters.user(ADMINS)))

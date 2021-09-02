@@ -68,9 +68,10 @@ def reset(update: Update, context: CallbackContext):
         ('admins', 'Show this group\'s staff 👷‍♂️'),
         ('ask', 'How to ask questions properly ❓'),
         ('help', 'Show commands 🆘'),
-        ('realistic', 'If people expect to much.'),
+        ('realistic', 'If people expect to much'),
+        ('fps', 'Games are demanding'),
         ('banana', 'Where update?'),
-        ('rant', 'Why updates don\'t have dates.'),
+        ('rant', 'Why updates don\'t have dates'),
         ('offtopic', 'Move messages to Off-Topic ➡️')],
         scope=BotCommandScopeChatAdministrators(SUPPORT_GROUP))
 

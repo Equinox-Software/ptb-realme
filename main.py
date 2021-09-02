@@ -77,6 +77,7 @@ if __name__ == '__main__':
     # Personal opinion
     dp.add_handler(CommandHandler("ram", ram, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("rant", rant, Filters.chat(SUPPORT_GROUP)))
+    dp.add_handler(CommandHandler("fps", fps, Filters.chat(SUPPORT_GROUP)))
 
     # Offtopic
     dp.add_handler(CommandHandler("translate", translate, Filters.chat(OFFTOPIC_GROUP)))

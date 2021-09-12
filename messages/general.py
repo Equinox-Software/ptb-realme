@@ -1,7 +1,7 @@
 import re
 import time
-import translators
 
+import translators
 from telegram import Update, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
 
@@ -27,11 +27,13 @@ def private_not_available(update: Update, _: CallbackContext):
 def cool(update: Update, context: CallbackContext):
     delay_group(update, context,
                 "<u>Cool and useful Apps</u>"
-                "\n\n<b>Moment Pro</b> · <a href='https://t.me/realme_offtopic/5344'>3.2.2 ⬇️</a>"
+                "\n\n<b>Moment Pro</b> · <a href='https://t.me/realme_files/4'>3.2.2 ⬇️</a>"
                 "\nSolid camera for professionals."
-                "\n\n<b>Aida64</b> · <a href='https://t.me/realme_offtopic/9346'>179 ⬇️</a>"
+                "\n\n<b>Aida64</b> · <a href='https://t.me/realme_files/3'>179 ⬇️</a>"
                 "\nAll the data about your device."
-                "\n\n<b>Videoder</b> · <a href='https://t.me/realme_offtopic/12457'>14.4.2 ⬇️</a>"
+                "\n\n<b>Evie</b> · <a href='https://t.me/realme_files/8'>2.14 ⬇️</a>"
+                "\nA neat and efficient launcher."
+                "\n\n<b>Videoder</b> · <a href='https://t.me/realme_files/2'>14.4.2 ⬇️</a>"
                 "\nDownload videos and music from YouTube or any other website."
                 "\n\nMore at /gcam and /cleaners.")
 
@@ -97,7 +99,10 @@ def rmx(update: Update, context: CallbackContext):
             text = "\n\nThe phone you mentioned is the <b>realme {}</b>.".format(result[0])
 
         if update.message.reply_to_message and update.message.from_user.id in VERIFIED_USERS:
-            update.message.delete()
+
+            if len(update.message.text) == 7:
+                update.message.delete()
+
             update.message.reply_to_message.reply_text(
                 "Hey {} 🤖".format(update.message.reply_to_message.from_user.name) + text,
                 parse_mode=ParseMode.HTML)
@@ -178,12 +183,12 @@ def realistic(update: Update, _: CallbackContext):
 
     if update.message.reply_to_message is not None:
         update.message.reply_to_message.reply_text("Calm down... you almost sound like this:"
-                                                   "\n\nREALME BED COMPANI!! WHERE MY ANDROID 14!!! ONLY 87FPS BGMI!! WHERE 90FPS 4K ULTRA???? MY PHONE ONLY 3 YEAR OLD!! WHERE RAM EXPAND FEATURE??? WHY NO UPDATE FOR NEXT DECADE??? WHY AOD-CUSTOMIZATION NOT WORK IN MY LCD DEVICE??? WE WANT ANDROID 14!!! NOW!!!"
+                                                   "\n\nREALME BED COMPANI!! WHERE MY ANDROID 14!!! ONLY 87FPS BGMI!! "
+                                                   "WHERE 90FPS 4K ULTRA???? MY PHONE ONLY 3 YEAR OLD!! WHERE RAM "
+                                                   "EXPAND FEATURE??? WHY NO UPDATE FOR NEXT DECADE??? WHY "
+                                                   "AOD-CUSTOMIZATION NOT WORK IN MY LCD DEVICE??? WE WANT ANDROID "
+                                                   "14!!! NOW!!! "
                                                    "\n\nBe realistic.. Realme does the best they already can.")
-
-
-def nice(update: Update, _: CallbackContext):
-    update.message.reply_text("nice")
 
 
 def polls(update: Update, context: CallbackContext):

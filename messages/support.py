@@ -59,6 +59,8 @@ def commands(update: Update, context: CallbackContext):
                 "\nList experts for different segments"
                 "\n\n<b>/gcam</b>"
                 "\nLatest GCam release and configurations"
+                "\n\n<b>/android12</b>"
+                "\nOfficial roadmap for the Early Access of RealmeUI 3.0"
                 "\n\n<b>/cleaners</b>"
                 "\nCleaners to keep your storage free and more"
                 "\n\n<b>/bug</b>"
@@ -69,6 +71,8 @@ def commands(update: Update, context: CallbackContext):
                 "\nHow long it takes for an update to arrive on your device after it got pushed."
                 "\n\n<b>/debloat</b>"
                 "\nHow to remove unwanted Apps"
+                "\n\n<b>/apk</b>"
+                "\nWhy an Apk fails to install"
                 "\n\n<b>/android11</b>"
                 "\nOfficial roadmap for the Early Access of RealmeUI 2.0"
                 "\n\n<b>/battery</b>"
@@ -114,8 +118,8 @@ def gcam(update: Update, context: CallbackContext):
     delay_group(update, context,
                 "<u>Google Camera</u>"
                 "\n\n<b>Releases</b>"
-                "\nPXv8.1_GCam · <a href='https://t.me/realme_offtopic/4177'>1.2 ⬇️ </a>"
-                "\n\nUrnyx05 · <a href='https://t.me/realme_offtopic/4176'>2.5 ⬇️ </a>"
+                "\nPXv8.1_GCam · <a href='https://t.me/realme_files/6'>1.2 ⬇️ </a>"
+                "\n\nUrnyx05 · <a href='https://t.me/realme_files/5'>2.5 ⬇️ </a>"
                 "\n\n\nUrnyx05's releases work well on most Realme devices. Take a look at @googlecameraport "
                 "for other releases. "
                 "\n\n\n<b>Configurations</b>"
@@ -136,7 +140,7 @@ def gcam(update: Update, context: CallbackContext):
 def cleaners(update: Update, context: CallbackContext):
     delay_group(update, context,
                 "<u>Cleaners</u>"
-                "\n\n<b>SD Maid</b> · <a href='https://t.me/realme_offtopic/8103'>5.1.6 ⬇️</a>"
+                "\n\n<b>SD Maid</b> · <a href='https://t.me/realme_files/7'>5.1.6 ⬇️</a>"
                 "\nThis is an excellent cleaning app, which also takes care of databases, duplicates, "
                 "caches etc. and enables you to freeze the apps you don't need. Oh yes.. and it's open-source 💗"
                 "\n\n<b>Phone Manager</b> · <a href='https://t.me/realme_support/126160'>8.6.1 ⬇️</a>"
@@ -174,6 +178,25 @@ def manual(update: Update, context: CallbackContext):
                 "even work as they should. "
                 "\n\nBe very careful with what you install. It's better to wait for the next automatic "
                 "software-update 😉")
+
+
+def apk(update: Update, context: CallbackContext):
+    delay_group_quote(update, context,
+                      "<u>Apk cannot be installed</u>"
+                      "\n\nThis can have multiple reasons:"
+                      "\n\n<b>Insufficient storage</b>"
+                      "\nYour storage may be insufficient. Please make sure that you have at least 500MB plus the "
+                      "size of your APK available."
+                      "\n\n<b>Wrong Android version</b>"
+                      "\nThe Android SDK version required by the App may be higher than what your device currently "
+                      "runs on. "
+                      "\n\n<b>Wrong device</b>"
+                      "\nMaybe the APK was made for a specific device only, meaning that some configurations or "
+                      "resources for your specific device might not be available. "
+                      "\n\n<b>App already installed</b>"
+                      "\nMaybe some app blocks the installation. This could also be if the installed App has a higher "
+                      "version than the one you want to install. In this case, you may want to firstly uninstall "
+                      "current App, then reinstall yours.")
 
 
 def form(update: Update, context: CallbackContext):
@@ -340,6 +363,22 @@ def android11(update: Update, context: CallbackContext):
                         "\n\nRelax and wait what happens 😎")
 
 
+def android12(update: Update, context: CallbackContext):
+    delay_group_preview(update, context,
+                        "<u>Realme UI 3.0</u>"
+                        "\n\n<i>Early Access is there to test stuff. Testing is easier with a reduced userbase. "
+                        "Therefore it will be rolled out to a limited number of people only 😉</i> "
+                        "\n\n· <a href='https://static.c.realme.com/IN/wm-thread/1450396247079804928.jpg'>Current "
+                        "Roadmap</a> "
+                        "\n\n<b>Early Access</b>"
+                        "\nThe timeline is for the first wave of early access rollout only. The version for the "
+                        "corresponding model will be released within the above mentioned month in batches, "
+                        "not at the beginning of the month. "
+                        "\n\n<b>Stable release</b>"
+                        "\nWill be pushed to all users over a period of time, a few months after early access."
+                        "\n\nRelax and wait what happens 😎")
+
+
 def debloat(update: Update, context: CallbackContext):
     delay_group(update, context,
                 "<u>Debloat</u>"
@@ -361,8 +400,19 @@ def debloat(update: Update, context: CallbackContext):
 def fps(update: Update, context: CallbackContext):
     delay_group(update, context,
                 "<b>High FPS & optimization for games</b>"
-                "\n\n<i>The following is based on personal opinion and experience by @nyx69 and also shortened up a bit to focus on more important parts.</i>"
-                "\n\nA game can be incredibly demanding these days and the company developing such game has to make sure that all the needed actions can happen in an even shorter amount of time between the frames. Therefore this company has to put a lot of effort into optimizing it for the devices they want to release it on, some a bit more and others a bit less."
-                "\n\nAlso the company providing Hardware has to optimize a few things to squeeze out the last bit of performance. On the other hand they can't just go for full performance as it may ruin the entire experience due to overheating, instability and what not."
-                "\n\nFinally I want to stress again how massively demanding a game can be. In my experience with natively developing comparable applications I can only say that it can be very painful and that you're also limited by the technologies you use and the resources, especially time and money, you have."
-                "\n\nNo need to be ignorant or pissed about it, but instead massive kudos to those developers and their hard work. And also my personal respect for the ones that have to find the right mix for a phone to provide the best performance for a specific type of device at a certain pricepoint.")
+                "\n\n<i>The following is based on personal opinion and experience by @nyx69 and also shortened up a "
+                "bit to focus on more important parts.</i> "
+                "\n\nA game can be incredibly demanding these days and the company developing such game has to make "
+                "sure that all the needed actions can happen in an even shorter amount of time between the frames. "
+                "Therefore this company has to put a lot of effort into optimizing it for the devices they want to "
+                "release it on, some a bit more and others a bit less. "
+                "\n\nAlso the company providing Hardware has to optimize a few things to squeeze out the last bit of "
+                "performance. On the other hand they can't just go for full performance as it may ruin the entire "
+                "experience due to overheating, instability and what not. "
+                "\n\nFinally I want to stress again how massively demanding a game can be. In my experience with "
+                "natively developing comparable applications I can only say that it can be very painful and that "
+                "you're also limited by the technologies you use and the resources, especially time and money, "
+                "you have. "
+                "\n\nNo need to be ignorant or pissed about it, but instead massive kudos to those developers and "
+                "their hard work. And also my personal respect for the ones that have to find the right mix for a "
+                "phone to provide the best performance for a specific type of device at a certain pricepoint.")

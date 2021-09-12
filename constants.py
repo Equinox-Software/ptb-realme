@@ -11,13 +11,13 @@ MODELS = {
     1931: ['X2 Pro'],
     1941: ['C2'],
     1971: ['5 Pro'],
-    1991: ['X2 China'],
-    1992: ['X2 India'],
+    1991: ['X2 (China)'],
+    1992: ['X2 (India)'],
     1993: ['X2 Europe'],
     2001: ['6', '6i'],
-    2002: ['6', '6i India'],
+    2002: ['6', '6i (India)'],
     2020: ['Narzo 10 A', 'C3'],
-    2027: ['C3 India'],
+    2027: ['C3 (India)'],
     2030: ['5i'],
     2040: ['Narzo 10'],
     2050: ['Narzo 20 A'],
@@ -36,7 +36,7 @@ MODELS = {
     2151: ['7', 'Narzo 20 Pro'],
     2155: ['7 Global'],
     2156: ['Narzo 30'],
-    2161: ['Narzo 20 Pro India'],
+    2161: ['Narzo 20 Pro (India)'],
     2170: ['7 Pro'],
     2176: ['X7'],
     2180: ['C15'],
@@ -54,7 +54,8 @@ MODELS = {
     3191: ['C25'],
     3193: ['C25'],
     3201: ['C21'],
-    3350: ['GT Neo Flash Edition']
+    3350: ['GT Neo Flash Edition'],
+    3360: ['GT Master Edition (India)']
 }
 
 FORBIDDEN_TEXT = (

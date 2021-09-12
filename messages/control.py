@@ -1,4 +1,4 @@
-from telegram import BotCommandScopeChat, Update, BotCommandScopeChatAdministrators, BotCommandScope
+from telegram import BotCommandScopeChat, Update, BotCommandScopeChatAdministrators
 from telegram.ext import CallbackContext
 
 from config import CONTROL_GROUP, SUPPORT_GROUP, OFFTOPIC_GROUP
@@ -25,13 +25,14 @@ def clear(update: Update, context: CallbackContext):
 
 def reset(update: Update, context: CallbackContext):
     context.bot.set_my_commands([
-        ('android11', 'Official update roadmap 📲'),
+        ('android12', 'Official 3.0 roadmap 📲'),
         ('gcam', 'Latest release and configurations 📷'),
         ('cleaners', 'The recommended cleaning apps ♻️'),
         ('whatsapp', 'Message the support directly 💬'),
         ('bug', 'How to report a bug ⚠️'),
         ('stable', 'Estimate the stable release date 📆'),
         ('push', 'How an update is pushed 🅿️'),
+        ('android11', 'Official 2.0 roadmap 📲'),
         ('debloat', 'Guide to remove unwanted apps 🚫'),
         ('battery', 'Keep your battery healthy 🔋'),
         ('polls', 'Take a look at our current polls 📊'),
@@ -40,6 +41,7 @@ def reset(update: Update, context: CallbackContext):
         ('aod', 'Why there is no Customization or AOD 🎨'),
         ('ram', 'Virtual Ram performance 💾'),
         ('manual', 'Manual updates may be worse 😟'),
+        ('apk', 'Why an Apk fails to install 🚫'),
         ('rules', 'Show this group\'s rules 📜'),
         ('experts', 'List experts for different segments 🎓'),
         ('admins', 'Show this group\'s staff 👷‍♂️'),
@@ -48,13 +50,14 @@ def reset(update: Update, context: CallbackContext):
         scope=BotCommandScopeChat(SUPPORT_GROUP))
 
     context.bot.set_my_commands([
-        ('android11', 'Official update roadmap 📲'),
+        ('android12', 'Official 3.0 roadmap 📲'),
         ('gcam', 'Latest release and configurations 📷'),
         ('cleaners', 'The recommended cleaning apps ♻️'),
         ('whatsapp', 'Message the support directly 💬'),
         ('bug', 'How to report a bug ⚠️'),
         ('stable', 'Estimate the stable release date 📆'),
         ('push', 'How an update is pushed 🅿️'),
+        ('android11', 'Official 2.0 roadmap 📲'),
         ('debloat', 'Guide to remove unwanted apps 🚫'),
         ('battery', 'Keep your battery healthy 🔋'),
         ('polls', 'Take a look at our current polls 📊'),
@@ -63,6 +66,7 @@ def reset(update: Update, context: CallbackContext):
         ('aod', 'Why there is no Customization or AOD 🎨'),
         ('ram', 'Virtual Ram performance 💾'),
         ('manual', 'Manual updates may be worse 😟'),
+        ('apk', 'Why an Apk fails to install 🚫'),
         ('rules', 'Show this group\'s rules 📜'),
         ('experts', 'List experts for different segments 🎓'),
         ('admins', 'Show this group\'s staff 👷‍♂️'),

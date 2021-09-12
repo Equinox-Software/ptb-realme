@@ -1,6 +1,5 @@
 import logging
 
-from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from telegram.ext import Updater, MessageHandler, Filters, CommandHandler, CallbackQueryHandler
@@ -58,6 +57,7 @@ if __name__ == '__main__':
 
     # Support
     dp.add_handler(CommandHandler("android11", android11, Filters.chat(SUPPORT_GROUP)))
+    dp.add_handler(CommandHandler("android12", android12, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("help", commands, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("admins", admins, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("experts", experts, Filters.chat(SUPPORT_GROUP)))
@@ -69,6 +69,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("benchmark", benchmark, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("aod", aod, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("manual", manual, Filters.chat(SUPPORT_GROUP)))
+    dp.add_handler(CommandHandler("apk", apk, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("offtopic", move_to_offtopic, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("bug", bug, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("stable", stable, Filters.chat(SUPPORT_GROUP)))
@@ -100,7 +101,6 @@ if __name__ == '__main__':
     # Crap
     dp.add_handler(CommandHandler("banana", banana))
     dp.add_handler(CommandHandler("realistic", realistic))
-    dp.add_handler(MessageHandler(Filters.regex(r"69"), nice, Filters.chat(OFFTOPIC_GROUP)))
 
     # Commands have to be added above
     # dp.add_error_handler(error)  # comment this one out for full stacktrace

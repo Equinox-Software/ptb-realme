@@ -92,8 +92,8 @@ def move_to_support(update: Update, context: CallbackContext):
                            "\n\nThose things belong in the Support-Group."
                            "\n\nI moved the message to @realme_support"
                            "\n\nPlease continue the discussion there."
-                           .format(update.message.reply_to_message.from_user.name)
-                           , "Continue here 😉", moved_link)
+                           .format(update.message.reply_to_message.from_user.name),
+                           "Continue here 😉", moved_link)
 
     else:
         delay_group(update, context,

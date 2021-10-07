@@ -18,7 +18,7 @@ def admins(update: Update, context: CallbackContext):
                 "\n@Prashant_Choudhary"
                 "\n@PacificPC"
                 "\n\n<b>Moderators</b>"
-                "\n@darkphoenix_69"
+                "\n@darkphoenix_6969"
                 "\n@blue_beettle69")
 
 

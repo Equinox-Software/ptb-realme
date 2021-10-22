@@ -56,7 +56,8 @@ MODELS = {
     3193: ['C25'],
     3201: ['C21'],
     3350: ['GT Neo Flash Edition'],
-    3360: ['GT Master Edition (India)']
+    3360: ['GT Master Edition (India)'],
+    3370: ['GT Neo 2']
 }
 
 FORBIDDEN_TEXT = (

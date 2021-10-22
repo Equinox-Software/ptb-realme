@@ -195,7 +195,7 @@ def polls(update: Update, context: CallbackContext):
     update.message.delete()
     current_time = now()
 
-    previous_timestamp = context.bot_data.get("previous_timestamp", 1000)
+    previous_timestamp = context.bot_data.get("previous_timestamp", current_time)
     previous_link = context.bot_data.get("previous_link", "https://t.me/realme_support/135222")
 
     if update.message.from_user.id in ADMINS and int(previous_timestamp) + 3628800000 <= current_time:
@@ -213,7 +213,7 @@ def polls(update: Update, context: CallbackContext):
                                                      InlineKeyboardButton("📊 Previous Poll 📊", previous_link)))
 
         context.bot_data['previous_link'] = start_message.link
-        context.bot_data['previous_timestamp'] = current_time
+        context.bot_data['previous_timestampprevious_timestamp'] = current_time
 
         question_0 = "How old are you? 🎂"
         answers_0 = ["below 15", "15-18", "19-21", "22-26", "27-32",

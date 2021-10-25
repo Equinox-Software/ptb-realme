@@ -28,7 +28,8 @@ def ask(update: Update, context: CallbackContext):
                 "\n\n<b>1. Formulate the question</b>"
                 "\nMake sure to include:"
                 "\n· The device you use"
-                "\n· The latest software installed"
+                "\n· Your current Android Version"
+                "\n· Version of the currently installed App"
                 "\n· What you want to do"
                 "\n· What you have tried already"
                 "\n· Why you want to do that"
@@ -143,7 +144,7 @@ def cleaners(update: Update, context: CallbackContext):
                 "\n\n<b>SD Maid</b> · <a href='https://t.me/realme_files/7'>5.1.6 ⬇️</a>"
                 "\nThis is an excellent cleaning app, which also takes care of databases, duplicates, "
                 "caches etc. and enables you to freeze the apps you don't need. Oh yes.. and it's open-source 💗"
-                "\n\n<b>Phone Manager</b> · <a href='https://t.me/realme_support/126160'>8.6.1 ⬇️</a>"
+                "\n\n<b>Phone Manager</b> · <a href='https://t.me/realme_files/8'>8.6.1 ⬇️</a>"
                 "\nOfficial Cleaner by Realme (requires Android 11).")
 
 

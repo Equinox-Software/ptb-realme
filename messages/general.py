@@ -175,7 +175,7 @@ def banana(update: Update, _: CallbackContext):
     update.message.delete()
 
     if update.message.reply_to_message is not None:
-        update.message.reply_to_message.reply_photo(open('resources/where_update.jpg', 'rb'))
+        update.message.reply_to_message.reply_photo(open('resources/where_update.png', 'rb'))
 
 
 def realistic(update: Update, _: CallbackContext):

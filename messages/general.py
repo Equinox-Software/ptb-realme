@@ -258,6 +258,27 @@ def polls(update: Update, context: CallbackContext):
                            "📊 Current Poll 📊", previous_link)
 
 
+def device(update: Update, context: CallbackContext):
+    update.message.delete()
+
+    if update.message.from_user in ADMINS and update.message.reply_to_message is not None:
+
+        if len(context.args) == 0:
+
+            if len(context.bot_data[update.message.reply_to_message.from_user.id]) == 0:
+                update.message.reply_to_message.reply_text("This user has no devices saved.")
+
+            else:
+                result = "This user has the following devices: \n"
+
+                for i in context.bot_data[update.message.reply_to_message.from_user.id]:
+                    result += "· " + i
+
+                update.message.reply_to_message.reply_text(result)
+        else:
+            context.bot_data[update.message.reply_to_message.from_user.id] = context.args
+
+
 def translate(update: Update, context: CallbackContext):
     update.message.delete()
 

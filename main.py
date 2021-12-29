@@ -90,6 +90,7 @@ if __name__ == '__main__':
     dp.add_handler(MessageHandler(Filters.text("@admin"), admin))
     dp.add_handler(CallbackQueryHandler(remove_click, pattern="BAN_remove"))
     dp.add_handler(CallbackQueryHandler(button_click))
+    dp.add_handler(CommandHandler("device", device))
 
     # Control
     dp.add_handler(CommandHandler("reset", reset, Filters.chat(CONTROL_GROUP) & Filters.user(ADMINS)))

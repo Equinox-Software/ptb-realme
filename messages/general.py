@@ -213,7 +213,7 @@ def polls(update: Update, context: CallbackContext):
                                                      InlineKeyboardButton("📊 Previous Poll 📊", previous_link)))
 
         context.bot_data['previous_link'] = start_message.link
-        context.bot_data['previous_timestampprevious_timestamp'] = current_time
+        context.bot_data['previous_timestamp'] = current_time
 
         question_0 = "How old are you? 🎂"
         answers_0 = ["below 15", "15-18", "19-21", "22-26", "27-32",
@@ -264,18 +264,11 @@ def device(update: Update, context: CallbackContext):
     if update.message.from_user.id in ADMINS and update.message.reply_to_message is not None:
 
         if len(context.args) == 0:
-            print("U")
 
             if len(context.bot_data[update.message.reply_to_message.from_user.id]) == 0:
-                print("Z")
-
                 update.message.reply_to_message.reply_text("This user has no devices saved.")
 
-
-
             else:
-                print("K")
-
                 result = "This user has the following devices: \n"
 
                 for i in context.bot_data[update.message.reply_to_message.from_user.id]:
@@ -283,12 +276,8 @@ def device(update: Update, context: CallbackContext):
 
                 update.message.reply_to_message.reply_text(result)
 
-
         else:
             context.bot_data[update.message.reply_to_message.from_user.id] = context.args
-            print("E")
-    else:
-        print("F")
 
 
 def translate(update: Update, context: CallbackContext):

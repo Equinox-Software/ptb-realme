@@ -2,7 +2,7 @@ python-telegram-bot==13.9
 psycopg2-binary
 sqlalchemy~=1.4.20
 ibm-watson>=5.2.0
-ujson==5.1.0
+ujson==4.0.2
 bs4==0.0.1
 lxml
 beautifulsoup4==4.10.0

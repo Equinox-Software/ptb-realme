@@ -264,19 +264,31 @@ def device(update: Update, context: CallbackContext):
     if update.message.from_user in ADMINS and update.message.reply_to_message is not None:
 
         if len(context.args) == 0:
+            print("U")
 
             if len(context.bot_data[update.message.reply_to_message.from_user.id]) == 0:
+                print("Z")
+
                 update.message.reply_to_message.reply_text("This user has no devices saved.")
 
+
+
             else:
+                print("K")
+
                 result = "This user has the following devices: \n"
 
                 for i in context.bot_data[update.message.reply_to_message.from_user.id]:
                     result += "· " + i
 
                 update.message.reply_to_message.reply_text(result)
+
+
         else:
             context.bot_data[update.message.reply_to_message.from_user.id] = context.args
+            print("E")
+    else:
+        print("F")
 
 
 def translate(update: Update, context: CallbackContext):

@@ -54,7 +54,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("rules", rules))
     dp.add_handler(CommandHandler("cool", cool))
     dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmx\d{4})"), rmx))
-    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmp\d{4})"), rmx))
+    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmp\d{4})"), rmp))
 
     # Support
     dp.add_handler(CommandHandler("android11", android11, Filters.chat(SUPPORT_GROUP)))

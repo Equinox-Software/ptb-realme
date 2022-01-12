@@ -364,12 +364,14 @@ def android11(update: Update, context: CallbackContext):
                         "\n\nRelax and wait what happens 😎")
 
 
-def android12(update: Update, context: CallbackContext):
+def android12(update: Update, context: CallbackContext):  # what about Italian and French roadmap?
     delay_group_preview(update, context,
                         "<u>Realme UI 3.0</u>"
                         "\n\n<i>Early Access is there to test stuff. Testing is easier with a reduced userbase. "
                         "Therefore it will be rolled out to a limited number of people only 😉</i> "
-                        "\n\n· <a href='https://static.c.realme.com/IN/wm-thread/1450396247079804928.jpg'>Current "
+                        "\n\n· <a href='https://static.c.realme.com/IN/wm-thread/1480895891824005120.png'>Current "
+                        "Roadmap</a> "
+                        "\n\n· <a href='https://static.c.realme.com/IN/wm-thread/1450396247079804928.jpg'>Previous "
                         "Roadmap</a> "
                         "\n\n<b>Early Access</b>"
                         "\nThe timeline is for the first wave of early access rollout in India only. The version for "

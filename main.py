@@ -54,6 +54,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("rules", rules))
     dp.add_handler(CommandHandler("cool", cool))
     dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmx\d{4})"), rmx))
+    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmp\d{4})"), rmx))
 
     # Support
     dp.add_handler(CommandHandler("android11", android11, Filters.chat(SUPPORT_GROUP)))
@@ -81,7 +82,6 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("fps", fps, Filters.chat(SUPPORT_GROUP)))
 
     # Offtopic
-    dp.add_handler(CommandHandler("translate", translate, Filters.chat(OFFTOPIC_GROUP)))
     dp.add_handler(CommandHandler("support", move_to_support, Filters.chat(OFFTOPIC_GROUP)))
 
     # Upcoming

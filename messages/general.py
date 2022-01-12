@@ -1,12 +1,11 @@
 import re
 import time
 
-import translators
 from telegram import Update, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
 
 from config import VERIFIED_USERS, CONTROL_GROUP
-from constants import MODELS
+from constants import PHONES, TABLETS
 from main import SUPPORT_GROUP, OFFTOPIC_GROUP, ADMINS
 from utils import delay_group, now, message_button_url
 
@@ -85,9 +84,9 @@ def rmx(update: Update, context: CallbackContext):
 
     model = int(str(re.search(r"rmx\d{4}", update.message.text, re.IGNORECASE).group(0))[3:7])
 
-    if model in MODELS:
+    if model in PHONES:
 
-        result: list = MODELS.get(model)
+        result: list = PHONES.get(model)
 
         if len(result) > 1:
             text = "\n\nDepending on the region there's multiple devices known as RMX{}:\n".format(model)
@@ -117,6 +116,47 @@ def rmx(update: Update, context: CallbackContext):
 
         update.message.reply_text("Sorry {} 🤖"
                                   "\n\nModel <b>RMX{}</b> was not found."
+                                  "\n\nMy human will add it later 😊".format(update.message.from_user.name, model),
+                                  parse_mode=ParseMode.HTML)
+
+
+def rmp(update: Update, context: CallbackContext):
+    # will do extra /device to display device info
+
+    model = int(str(re.search(r"rmp\d{4}", update.message.text, re.IGNORECASE).group(0))[3:7])
+
+    if model in TABLETS:
+
+        result: list = TABLETS.get(model)  # will leave it as a list.. who knows what Realme may do in the future lel
+
+        if len(result) > 1:
+            text = "\n\nDepending on the region there's multiple devices known as RMP{}:\n".format(model)
+
+            for device in result:
+                text += "\n· realme {}".format(device)
+
+        else:
+            text = "\n\nThe phone you mentioned is the <b>realme {}</b>.".format(result[0])
+
+        if update.message.reply_to_message and update.message.from_user.id in VERIFIED_USERS:
+
+            if len(update.message.text) == 7:
+                update.message.delete()
+
+            update.message.reply_to_message.reply_text(
+                "Hey {} 🤖".format(update.message.reply_to_message.from_user.name) + text,
+                parse_mode=ParseMode.HTML)
+
+        else:
+            update.message.reply_text(text, parse_mode=ParseMode.HTML)
+
+    else:
+        context.bot.send_message(CONTROL_GROUP, "#TODO - from user: {}"
+                                                "\n\nAdd RMP {} to list of devices‼️"
+                                 .format(update.message.from_user.name, model))
+
+        update.message.reply_text("Sorry {} 🤖"
+                                  "\n\nModel <b>RMP{}</b> was not found."
                                   "\n\nMy human will add it later 😊".format(update.message.from_user.name, model),
                                   parse_mode=ParseMode.HTML)
 
@@ -271,54 +311,9 @@ def device(update: Update, context: CallbackContext):
             else:
                 result = "This user has the following devices: \n"
 
-                for i in context.bot_data[update.message.reply_to_message.from_user.id]:
-                    result += "· " + i
+                result += "· ".join(context.bot_data[update.message.reply_to_message.from_user.id])
 
                 update.message.reply_to_message.reply_text(result)
 
         else:
             context.bot_data[update.message.reply_to_message.from_user.id] = context.args
-
-
-def translate(update: Update, context: CallbackContext):
-    update.message.delete()
-
-    if update.message.reply_to_message is not None:
-
-        if len(context.args) == 0 or len(context.args) > 2:
-            context.bot.send_message(
-                update.message.chat_id,
-                "Please supply a language-code, for example <code>/translate de</code> to translate from German "
-                "to English or <code>/translate en it</code> to translate from English to Italian.", ParseMode.HTML)
-        else:
-            from_language = context.args[0].lower()
-
-            if len(context.args) == 2:
-                to_language = context.args[1].lower()
-            else:
-                to_language = 'en'  # update.message.from_user.language_code
-
-            if update.message.reply_to_message.caption is not None:
-                text_translation = update.message.reply_to_message.caption
-            elif update.message.reply_to_message.text is not None:
-                text_translation = update.message.reply_to_message.text
-            else:
-                context.bot.send_message(
-                    update.message.chat_id,
-                    "The quoted media has no caption. Please quote a text message or a message with caption, "
-                    "for example <code>/translate de</code> to translate from German to English or "
-                    "<code>/translate en it</code> to translate from English to Italian.", ParseMode.HTML)
-                return
-
-            update.message.reply_to_message.reply_text(
-                "Translation ({} ➜ {})\n\n{}".format(from_language, to_language,
-                                                     translators.deepl(text_translation, from_language=from_language,
-                                                                       to_language=to_language)),
-                ParseMode.HTML)
-
-    else:
-        context.bot.send_message(
-            update.message.chat_id,
-            "Quote the message you want to translate and the use this command, for example <code>/translate de</code> "
-            "to translate from German to English or <code>/translate en it</code> to translate from English to Italian.",
-            ParseMode.HTML)

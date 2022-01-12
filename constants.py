@@ -1,4 +1,4 @@
-MODELS = {
+PHONES = {
     1801: ['2 Pro'],
     1805: ['2', 'C1'],
     1821: ['3', '4'],
@@ -8,6 +8,7 @@ MODELS = {
     1901: ['X'],
     1911: ['5', '5s'],
     1921: ['XT'],
+    1925: ['5s (India)'],
     1931: ['X2 Pro'],
     1941: ['C2'],
     1971: ['5 Pro'],
@@ -51,13 +52,20 @@ MODELS = {
     3081: ['8 Pro'],
     3085: ['8'],
     3092: ['X7 5G'],
+    3151: ['8i'],
     3171: ['Narzo 30A'],
     3191: ['C25'],
     3193: ['C25'],
     3201: ['C21'],
+    3242: ['Narzo 30 5G'],
     3350: ['GT Neo Flash Edition'],
     3360: ['GT Master Edition (India)'],
+    3363: ['GT Master Explorer Edition'],
     3370: ['GT Neo 2']
+}
+
+TABLETS = {
+    2103: ['Pad']  # lel
 }
 
 FORBIDDEN_TEXT = (

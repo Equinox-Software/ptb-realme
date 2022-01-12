@@ -3,11 +3,11 @@ from collections import OrderedDict
 
 from bs4 import BeautifulSoup
 
-from constants import MODELS
+from constants import PHONES
 
 
 def sort_models():
-    print(str(dict(OrderedDict(sorted(MODELS.items(), key=lambda t: t[0])))).replace("(", "").replace(")", ""))
+    print(str(dict(OrderedDict(sorted(PHONES.items(), key=lambda t: t[0])))).replace("(", "").replace(")", ""))
 
 
 def fetch_device_data():

@@ -70,6 +70,8 @@ def commands(update: Update, context: CallbackContext):
                 "\nHow to estimate the stable release date"
                 "\n\n<b>/push</b>"
                 "\nHow long it takes for an update to arrive on your device after it got pushed."
+                "\n\n<b>/policy</b>"
+                "\nRealme's update policy"
                 "\n\n<b>/debloat</b>"
                 "\nHow to remove unwanted Apps"
                 "\n\n<b>/apk</b>"
@@ -154,17 +156,17 @@ def aod(update: Update, context: CallbackContext):
                       "\n\n<u>Always-On-Display</u>"
                       "\n\n<i>Be aware that the upcoming paragraphs are simplified and won't go over the actual "
                       "complexity behind those subjects.</i>"
-                      "\n\n\n<b>Why don't I have an Always-On-Display?</b>"
-                      "\n\nIf your device has an LCD, AODs are pointless as the backlight of the LCD will be "
-                      "on - no matter what's been shown on screen."
-                      "\n\nAODs make more sense on an AMOLED, where individual pixels can turn off entirely, "
-                      "thus saving battery. "
                       "\n\n\n<b>Why can't I customize my AOD?</b>"
                       "\n\nThis is due to something that's often referred to as a \"ram-less display\", meaning that "
                       "your display only uses the device's Ram, which limits its capabilities a bit. "
                       "This isn't something bad at all. It's just the conventional way displays are made."
                       "\n\nYour phone's display quite likely simply doesn't support this additional feature. "
-                      "Currently it's only working on the GT, GT Neo, X50 Pro, X2, X2 Pro, X, XT and X7 Max.")
+                      "Currently it's only working on the GT, GT Neo, X50 Pro, X2, X2 Pro, X, XT and X7 Max."
+                      "\n\n\n<b>Why don't I have an Always-On-Display?</b>"
+                      "\n\nIf your device has an LCD, AODs are pointless as the backlight of the LCD will be "
+                      "on - no matter what's been shown on screen."
+                      "\n\nAODs make more sense on an AMOLED, where individual pixels can turn off entirely, "
+                      "thus saving battery. ")
 
 
 def manual(update: Update, context: CallbackContext):
@@ -236,9 +238,9 @@ def stable(update: Update, context: CallbackContext):
     delay_group_quote(update, context,
                       "Hey {} 🤖"
                       "\n\n<i>Realme rolls out an Update, if it works as expected - not if a certain date is met. "
-                      "Therefore an exact date for when you will receive an update doesn't exist.</i> "
+                      "Therefore an exact date for when you will receive an update does not exist.</i> "
                       "\n\n<b>Estimating the stable release date</b>"
-                      "\nUse /android11 and add a minimum of 6 months after the Early Access date. This is the "
+                      "\nUse /android11 or /android12 and add a minimum of 6 months after the Early Access date. This is the "
                       "timeframe developers currently need to go from Beta to Stable. "
                       "\n\nDevelopers are working very hard currently, but it may still take some time. Please stand "
                       "by.")
@@ -418,4 +420,105 @@ def fps(update: Update, context: CallbackContext):
                 "you have. "
                 "\n\nNo need to be ignorant or pissed about it, but instead massive kudos to those developers and "
                 "their hard work. And also my personal respect for the ones that have to find the right mix for a "
-                "phone to provide the best performance for a specific type of device at a certain pricepoint.")
+                "phone to provide the best performance for a specific type of device at a certain price-point.")
+
+
+def policy(update: Update, context: CallbackContext):
+    delay_group_quote(update, context,
+                      "<u>Update policy</u>"
+                      "\n\n<i>Realme in general prefers to release updates once they are optimized enough for end-user "
+                      "devices. For more details on that, see /stable."
+                      "\n\nThe information contained in this message comes from <a href=''>here</a>.</i> "
+                      "\n\n<b>Estimating the stable release date</b>"
+                      "\nUse /android11 and add a minimum of 6 months after the Early Access date. This is the "
+                      "timeframe developers currently need to go from Beta to Stable. "
+                      "\n\nDevelopers are working very hard currently, but it may still take some time. Please stand "
+                      "by.")
+
+
+def fooview(update: Update, context: CallbackContext):
+    delay_group_quote(update, context,
+                      "<u>Appservices not found</u>"
+                      "\n\nBe very careful with what application you uninstall as some might be needed for your device "
+                      "to run properly! If you just want to free up some space, try /debloat instead."
+                      "\n\nThe error can occur if you installed an Apk that was not made for your device (see /manual "
+                      "for more on that)."
+                      "\n\nThe solution is to uninstall the previously installed App. If you can't uninstall the app "
+                      "like you'd normally do, you can also use <a "
+                      "href='https://play.google.com/store/apps/details?id=com.fooview.android.fooview'>fooView</a>. "
+                      "It often happens with Phone-Manager, so we'll use this App as an example here. "
+                      "\n\n<a href='https://telegra.ph/How-to-solve-Phone-Manager-enable-app-services-problem-01-25-2"
+                      "'>➡️ Guide to fix it</a>")
+
+
+def wtf(update: Update, context: CallbackContext):
+    delay_group(update, context,
+                "Hey {} 🤖"
+                "\n\nI have no clue whatever you tried to say here."
+                "\n\nPlease reformulate the question and try again. See /ask to find out what to include when asking."
+                .format(update.message.reply_to_message.from_user.name))
+
+
+def swap(update: Update, context: CallbackContext):
+    delay_group(update, context, "<b>Talking about Swap etc.</b>"
+                                 "\n\n<i>The following is based on personal research and opinin by @nyx69</i>"
+                                 "\n\nA performance advantage is often talked about, since ZRAM is faster than swap. "
+                                 "The whole thing may be true for normal PCs, but we're using Android here and things "
+                                 "look a little different there! "
+                                 "\n\nFirst of all, a brief statement for those who have not been in the Android "
+                                 "scene for that long: "
+                                 "\n\nZRAM = ramzswap = compcache"
+                                 "\n\n\nIn order to explain ZRAM more precisely, other terms must first be clarified "
+                                 "in more detail: "
+                                 "\n\nSwap can be compared to the paging file in Windows.  If the main memory (RAM) "
+                                 "is too full, the PC can swap out the data that is not actively used (e.g. "
+                                 "background applications) in order to free up RAM again.  For this purpose, "
+                                 "this data is written to a hard disk.  If necessary, this data can then simply be "
+                                 "read from there again.  However, even the fastest SSD is slower than the main "
+                                 "memory.  There is no swap on Android! "
+                                 "\n\nWith ZRAM, memory resources that are not required are compressed and then moved "
+                                 "to a permanently reserved area in RAM (ZRAM).  So a kind of swap partition in the "
+                                 "main memory. As a result, more RAM is free, since the data then only has about 1/4 "
+                                 "of the former memory requirement.  However, the CPU has to do more work because it "
+                                 "has to compress the data (or uncompress it again when it is needed again).  The "
+                                 "advantage here is clearly the speed.  Because the swap partition resides in RAM, "
+                                 "it is much faster than a swap partition on a hard drive. "
+                                 "\n\nIn and of itself a great thing.  But Android does not have a swap partition and "
+                                 "therefore ZRAM does not bring any performance gain under Android as it would on a "
+                                 "normal PC. "
+                                 "\n\n\nOn a normal PC it would look like this:"
+                                 "\nSwap = paging file (on disk) --> Slow"
+                                 "\nZRAM (swap in RAM) --> Faster than swap"
+                                 "\nRAM --> Fast"
+                                 "\n\nWith Android there is no swap partition and therefore ZRAM does not bring a "
+                                 "performance boost. The only thing ZRAM brings is \"more\" RAM.  Compressing "
+                                 "\"increases\" the available working memory, so to speak.  This is also quite useful "
+                                 "on devices with very little RAM (<256MB).  But the S2 has 1GB and that's more than "
+                                 "enough.  It doesn't have to be artificially pushed up to 1.5GB. Because if you "
+                                 "activate ZRAM, it also has 2 disadvantages.  Compressing and decompressing consumes "
+                                 "CPU time, which in turn results in higher power consumption. "
+                                 "\n\n\nSo roughly one can say:"
+                                 "\n>> Without ZRAM: +CPU performance |  +Battery |  -RAM"
+                                 "\n>> With ZRAM: -CPU Performance |  -Battery |  +RAM"
+                                 "\n\nSo it makes sense for devices with too little RAM, but at a cost.")
+
+
+def miss(update: Update, context: CallbackContext):
+    delay_group(update, context,
+                "Hey {} 🤖"
+                "\n\nThis just means that you missed it."
+                "\n\nEarly Access usually is..."
+                "\n\n- for India only"
+                "\n- rolled out in 1-3 batches"
+                "\n- limited to 500 people per batch"
+                "\n- pushed randomly to users' devices"
+                "\n\nResulting in a small group of people getting access  enables for more controlled testing and "
+                "less possible issues. "
+                .format(update.message.reply_to_message.from_user.name))
+
+
+def official(update: Update, context: CallbackContext):
+    delay_group(update, context,
+                "Hey {} 🤖"
+                "\n\nThis group is not an official group by Realme. We are just a community trying to help each other."
+                "\n\nJust ask friendly. If anyone here reads your message and can provide something useful to it, he'll respond.")

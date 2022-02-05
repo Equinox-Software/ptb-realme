@@ -76,6 +76,10 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("stable", stable, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("push", push, Filters.chat(SUPPORT_GROUP)))
 
+    dp.add_handler(CommandHandler("policy", policy, Filters.chat(SUPPORT_GROUP)))
+    dp.add_handler(CommandHandler("fooview", fooview, Filters.chat(SUPPORT_GROUP)))
+    dp.add_handler(CommandHandler("wtf", wtf, Filters.chat(SUPPORT_GROUP) & Filters.user(ADMINS)))
+
     # Personal opinion
     dp.add_handler(CommandHandler("ram", ram, Filters.chat(SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("rant", rant, Filters.chat(SUPPORT_GROUP)))
@@ -91,6 +95,11 @@ if __name__ == '__main__':
     dp.add_handler(CallbackQueryHandler(remove_click, pattern="BAN_remove"))
     dp.add_handler(CallbackQueryHandler(button_click))
     dp.add_handler(CommandHandler("device", device))
+
+    # Testing
+    dp.add_handler(CommandHandler("miss", miss))
+    dp.add_handler(CommandHandler("swap", swap))
+    dp.add_handler(CommandHandler("official", official))
 
     # Control
     dp.add_handler(CommandHandler("reset", reset, Filters.chat(CONTROL_GROUP) & Filters.user(ADMINS)))

@@ -30,6 +30,8 @@ def reset(update: Update, context: CallbackContext):
         ('cleaners', 'The recommended cleaning apps ♻️'),
         ('whatsapp', 'Message the support directly 💬'),
         ('bug', 'How to report a bug ⚠️'),
+        ('policy', 'Realme\'s update policy 📲'),
+        ('fooview', 'Uninstall with fooView 🚫'),
         ('stable', 'Estimate the stable release date 📆'),
         ('push', 'How an update is pushed 🅿️'),
         ('android11', 'Official 2.0 roadmap 📲'),
@@ -55,6 +57,8 @@ def reset(update: Update, context: CallbackContext):
         ('cleaners', 'The recommended cleaning apps ♻️'),
         ('whatsapp', 'Message the support directly 💬'),
         ('bug', 'How to report a bug ⚠️'),
+        ('policy', 'Realme\'s update policy 📲'),
+        ('fooview', 'Uninstall with fooView 🚫'),
         ('stable', 'Estimate the stable release date 📆'),
         ('push', 'How an update is pushed 🅿️'),
         ('android11', 'Official 2.0 roadmap 📲'),
@@ -76,6 +80,7 @@ def reset(update: Update, context: CallbackContext):
         ('fps', 'Games are demanding'),
         ('banana', 'Where update?'),
         ('rant', 'Why updates don\'t have dates'),
+        ('wtf', 'What does this even mean?'),
         ('offtopic', 'Move messages to Off-Topic ➡️')],
         scope=BotCommandScopeChatAdministrators(SUPPORT_GROUP))
 

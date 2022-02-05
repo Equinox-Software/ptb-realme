@@ -59,9 +59,12 @@ PHONES = {
     3201: ['C21'],
     3242: ['Narzo 30 5G'],
     3350: ['GT Neo Flash Edition'],
+    3357: ['GT Neo 2T'],
     3360: ['GT Master Edition (India)'],
+    3261: ['C21Y'],
     3363: ['GT Master Explorer Edition'],
     3370: ['GT Neo 2']
+
 }
 
 TABLETS = {

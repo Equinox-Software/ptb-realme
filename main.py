@@ -100,6 +100,7 @@ if __name__ == '__main__':
     dp.add_handler(CommandHandler("miss", miss))
     dp.add_handler(CommandHandler("swap", swap))
     dp.add_handler(CommandHandler("official", official))
+    dp.add_handler(CommandHandler("charge", charge))
 
     # Control
     dp.add_handler(CommandHandler("reset", reset, Filters.chat(CONTROL_GROUP) & Filters.user(ADMINS)))

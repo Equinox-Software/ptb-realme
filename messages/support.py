@@ -438,7 +438,7 @@ def policy(update: Update, context: CallbackContext):
 
 def fooview(update: Update, context: CallbackContext):
     delay_group_quote(update, context,
-                      "<u>Appservices not found</u>"
+                      "<u>App-Services not found</u>"
                       "\n\nBe very careful with what application you uninstall as some might be needed for your device "
                       "to run properly! If you just want to free up some space, try /debloat instead."
                       "\n\nThe error can occur if you installed an Apk that was not made for your device (see /manual "
@@ -461,52 +461,15 @@ def wtf(update: Update, context: CallbackContext):
 
 def swap(update: Update, context: CallbackContext):
     delay_group(update, context, "<b>Talking about Swap etc.</b>"
-                                 "\n\n<i>The following is based on personal research and opinin by @nyx69</i>"
-                                 "\n\nA performance advantage is often talked about, since ZRAM is faster than swap. "
-                                 "The whole thing may be true for normal PCs, but we're using Android here and things "
-                                 "look a little different there! "
-                                 "\n\nFirst of all, a brief statement for those who have not been in the Android "
-                                 "scene for that long: "
-                                 "\n\nZRAM = ramzswap = compcache"
-                                 "\n\n\nIn order to explain ZRAM more precisely, other terms must first be clarified "
-                                 "in more detail: "
-                                 "\n\nSwap can be compared to the paging file in Windows.  If the main memory (RAM) "
-                                 "is too full, the PC can swap out the data that is not actively used (e.g. "
-                                 "background applications) in order to free up RAM again.  For this purpose, "
-                                 "this data is written to a hard disk.  If necessary, this data can then simply be "
-                                 "read from there again.  However, even the fastest SSD is slower than the main "
-                                 "memory.  There is no swap on Android! "
-                                 "\n\nWith ZRAM, memory resources that are not required are compressed and then moved "
-                                 "to a permanently reserved area in RAM (ZRAM).  So a kind of swap partition in the "
-                                 "main memory. As a result, more RAM is free, since the data then only has about 1/4 "
-                                 "of the former memory requirement.  However, the CPU has to do more work because it "
-                                 "has to compress the data (or uncompress it again when it is needed again).  The "
-                                 "advantage here is clearly the speed.  Because the swap partition resides in RAM, "
-                                 "it is much faster than a swap partition on a hard drive. "
-                                 "\n\nIn and of itself a great thing.  But Android does not have a swap partition and "
-                                 "therefore ZRAM does not bring any performance gain under Android as it would on a "
-                                 "normal PC. "
-                                 "\n\n\nOn a normal PC it would look like this:"
-                                 "\nSwap = paging file (on disk) --> Slow"
-                                 "\nZRAM (swap in RAM) --> Faster than swap"
-                                 "\nRAM --> Fast"
-                                 "\n\nWith Android there is no swap partition and therefore ZRAM does not bring a "
-                                 "performance boost. The only thing ZRAM brings is \"more\" RAM.  Compressing "
-                                 "\"increases\" the available working memory, so to speak.  This is also quite useful "
-                                 "on devices with very little RAM (<256MB).  But the S2 has 1GB and that's more than "
-                                 "enough.  It doesn't have to be artificially pushed up to 1.5GB. Because if you "
-                                 "activate ZRAM, it also has 2 disadvantages.  Compressing and decompressing consumes "
-                                 "CPU time, which in turn results in higher power consumption. "
-                                 "\n\n\nSo roughly one can say:"
-                                 "\n>> Without ZRAM: +CPU performance |  +Battery |  -RAM"
-                                 "\n>> With ZRAM: -CPU Performance |  -Battery |  +RAM"
-                                 "\n\nSo it makes sense for devices with too little RAM, but at a cost.")
+                                 "\n\n<i>The following is based on personal research and opinion by @nyx69</i>"
+                                 "\n\n<a href='https://telegra.ph/What-is-zram-and-how-does-it-work-02-05"
+                                 "'>➡️ Detailed explanation</a>")
 
 
 def miss(update: Update, context: CallbackContext):
     delay_group(update, context,
                 "Hey {} 🤖"
-                "\n\nThis just means that you missed it."
+                "\n\nYou just missed this update."
                 "\n\nEarly Access usually is..."
                 "\n\n- for India only"
                 "\n- rolled out in 1-3 batches"
@@ -514,6 +477,8 @@ def miss(update: Update, context: CallbackContext):
                 "\n- pushed randomly to users' devices"
                 "\n\nResulting in a small group of people getting access  enables for more controlled testing and "
                 "less possible issues. "
+                "\n\nYou can either wait for the next batch to be released, but chances of being selected are very "
+                "low. Preferably wait for stable release (tap /stable for more). "
                 .format(update.message.reply_to_message.from_user.name))
 
 
@@ -521,4 +486,28 @@ def official(update: Update, context: CallbackContext):
     delay_group(update, context,
                 "Hey {} 🤖"
                 "\n\nThis group is not an official group by Realme. We are just a community trying to help each other."
-                "\n\nJust ask friendly. If anyone here reads your message and can provide something useful to it, he'll respond.")
+                "\n\nJust ask friendly. If anyone here reads your message and can provide something useful to it, "
+                "he'll respond. "
+                .format(update.message.reply_to_message.from_user.name))
+
+
+def charge(update: Update, context: CallbackContext):
+    delay_group(update, context, "<b>Calculating charge times in theory</b>"
+                                 "\n\n[Potential of your battery (in volts) × size of your battery (in mAh) ÷ 1000 ("
+                                 "to correct for the mAh)] ÷ [Potential of your charger (in volts) × current your "
+                                 "charger provides (in mA)] "
+                                 "\n\nI don't know the exact Potential for this particular device, but it's often "
+                                 "approx. 3.7V. The Divisor is basically the Wattage of your charger, so we'll take "
+                                 "18W as the charger it comes with is rated 9V/2A. Resulting [3.7V × 6000mAh ÷ 1000] "
+                                 "÷ 18 = ~1,23h for the narzo 30A, which seems to be way too optimistic for such a "
+                                 "big battery in combination with that slow charger. "
+                                 "\n\n\n<b>Correcting for a best case</b>"
+                                 "\n\nThe narzo 30A is advertised to also support flash charge (30W?) and 6000mAh is "
+                                 "only the advertised \"typical\" capacity, 5860 being the minimum according to "
+                                 "Realme. "
+                                 "\n\n[3.7V × 5.86Ah] ÷ 30W = ~0.72h"
+                                 "\n\nVerifying this with my X2 Pro:"
+                                 "\n\n[3.7V  × 4Ah] ÷ 50000 = ~0.3h"
+                                 "\n\nWe see that it takes about double that time, but that's what to expect as "
+                                 "filling a battery to the brim takes some time, it's more like 0.6h in reality. Also "
+                                 "note that charging on the X2 Pro works differently as it has two cells to be fed.")

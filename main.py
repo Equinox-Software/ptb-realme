@@ -8,13 +8,13 @@ import logging
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from telegram import Update
+from telegram import Update, ParseMode
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
     Filters,
     MessageHandler,
-    Updater,
+    Updater, Defaults,
 )
 
 import config
@@ -90,7 +90,8 @@ def error(update: Update, context: CallbackContext):
 if __name__ == "__main__":
     session = start_session()
 
-    updater = Updater(config.TOKEN, persistence=PostgresPersistence(session))
+    updater = Updater(config.TOKEN, persistence=PostgresPersistence(session),
+                      defaults=Defaults(parse_mode=ParseMode.HTML))
     dp = updater.dispatcher
 
     for i in FORBIDDEN_TEXT:

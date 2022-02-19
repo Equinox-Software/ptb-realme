@@ -51,7 +51,8 @@ def apk(update: Update, context: CallbackContext):
 
 def form(update: Update, context: CallbackContext):
     """Handle for /form."""
-    delay_group_button_url(update, context, open("strings/form.html").read())
+    delay_group_button_url(update, context, open("strings/form.html").read(), button_text="Access form 📝",
+                           button_url="https://docs.google.com/forms/d/e/1FAIpQLSceGI9ZaNOIb4NN-3UdJ-mbzvbRwulAh2-VGJasy8VU_BLsFA/viewform")
 
 
 def bug(update: Update, context: CallbackContext):

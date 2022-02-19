@@ -1,3 +1,5 @@
+"""Database file."""
+
 from collections import defaultdict
 from logging import getLogger
 from typing import Dict, Any, Callable
@@ -13,6 +15,7 @@ from telegram.utils.helpers import (
 
 
 class PostgresPersistence(DictPersistence):
+    """Class for database persistence."""
 
     def __init__(
             self,
@@ -21,6 +24,7 @@ class PostgresPersistence(DictPersistence):
             store_chat_data: bool = True,
             store_bot_data: bool = True,
     ) -> None:
+        """Make a new persistence."""
         super().__init__(
             store_user_data=store_user_data,
             store_chat_data=store_chat_data,
@@ -48,10 +52,16 @@ class PostgresPersistence(DictPersistence):
             data = data_[0] if data_ is not None else {}
 
             self.logger.info("Loading database \n%s", data)
-            self._chat_data = defaultdict(dict, self._key_mapper(data.get("chat_data", {}), int))
-            self._user_data = defaultdict(dict, self._key_mapper(data.get("user_data", {}), int))
+            self._chat_data = defaultdict(
+                dict, self._key_mapper(data.get("chat_data", {}), int)
+            )
+            self._user_data = defaultdict(
+                dict, self._key_mapper(data.get("user_data", {}), int)
+            )
             self._bot_data = data.get("bot_data", {})
-            self._conversations = decode_conversations_from_json(data.get("conversations", "{}"))
+            self._conversations = decode_conversations_from_json(
+                data.get("conversations", "{}")
+            )
             self.logger.info("Database loaded successfully!")
         finally:
             self._session.close()
@@ -71,6 +81,7 @@ class PostgresPersistence(DictPersistence):
         return json.dumps(to_dump)
 
     def flush(self) -> None:
+        """Flush database."""
         self.logger.info("Saving user/chat/bot data before shutdown")
         try:
             self._session.execute("DELETE FROM persistence")

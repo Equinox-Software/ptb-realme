@@ -1,0 +1,16 @@
+<b>Calculating charge times in theory</b>
+
+[Potential of your battery (in volts) × size of your battery (in mAh) ÷ 1000 (to correct for the mAh)] ÷ [Potential of your charger (in volts) × current your charger provides (in mA)]
+
+I don't know the exact Potential for this particular device, but it's often approx. 3.7V. The Divisor is basically the Wattage of your charger, so we'll take 18W as the charger it comes with is rated 9V/2A. Resulting [3.7V × 6000mAh ÷ 1000] ÷ 18 = ~1,23h for the Narzo 30A, which seems to be way too optimistic for such a big battery in combination with that slow charger.
+
+
+<b>Correcting for the best case</b>
+
+The Narzo 30A is advertised to also support flash charge (30W?) and 6000mAh is only the advertised "typical" capacity, 5860 being the minimum according to Realme.
+
+[3.7V × 5.86Ah] ÷ 30W = ~0.72h
+
+Verifying this with my X2 Pro: [3.7V  × 4Ah] ÷ 50000 = ~0.3h
+
+We see that it takes about double that time, but that's what to expect as filling a battery to the brim takes some time, it's more like 0.6h in reality. Also note that charging on the X2 Pro works differently as it has two cells to be fed.

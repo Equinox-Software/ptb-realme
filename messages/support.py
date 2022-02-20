@@ -10,7 +10,7 @@ from utils import (
     delete,
     delay_group_quote,
     delay_group_button_url,
-    delay_group_preview,
+    delay_group_preview, delay_html,
 )
 
 
@@ -205,4 +205,4 @@ def charge(update: Update, context: CallbackContext):
 
 def miss(update: Update, context: CallbackContext):
     """Handle for /miss."""
-    delay_group(update, context, open("strings/miss.html").read())
+    delay_html(update, context, "miss")

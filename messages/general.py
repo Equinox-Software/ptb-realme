@@ -11,7 +11,7 @@ from telegram.ext import CallbackContext
 
 from config import VERIFIED_USERS, CONTROL_GROUP, OFFTOPIC_GROUP, SUPPORT_GROUP, ADMINS
 from constants import PHONES, TABLETS
-from utils import delay_group, now, message_button_url
+from utils import delay_group, now, message_button_url, delay_html
 
 
 def private_not_available(update: Update, _: CallbackContext):
@@ -380,4 +380,4 @@ def device(update: Update, context: CallbackContext):
 
 def about(update: Update, context: CallbackContext):
     """Handle for /about."""
-    delay_group(update, context, open("strings/about.html").read())
+    delay_html(update, context, "about")

@@ -7,8 +7,7 @@ from config import CONTROL_GROUP, SUPPORT_GROUP, OFFTOPIC_GROUP
 
 
 def clear(update: Update, context: CallbackContext):
-    """Clear commands and data."""
-    context.chat_data.clear()  # TODO ask Starry to add that
+    """Clear commands."""
 
     context.bot.delete_my_commands(BotCommandScopeChat(SUPPORT_GROUP))
     context.bot.delete_my_commands(BotCommandScopeChat(OFFTOPIC_GROUP))
@@ -21,7 +20,7 @@ def clear(update: Update, context: CallbackContext):
         scope=BotCommandScopeChat(CONTROL_GROUP),
     )
 
-    update.message.reply_text("User dicts and commands were cleared.")
+    update.message.reply_text("Command lists were cleared.")
 
 
 def reset(update: Update, context: CallbackContext):
@@ -46,24 +45,20 @@ def reset(update: Update, context: CallbackContext):
         ("manual", "Manual updates may be worse 😟"),
         ("apk", "Why an Apk fails to install 🚫"),
         ("rules", "Show this group's rules 📜"),
-        ("experts", "List experts for different segments 🎓"),
-        ("admins", "Show this group's staff 👷‍♂️"),
         ("ask", "How to ask questions properly ❓"),
         ("help", "Show commands 🆘"),
+        ("about", "Information about this Bot 🤖")
     ]
 
     context.bot.set_my_commands(support_commands, scope=BotCommandScopeChat(SUPPORT_GROUP))
 
-    context.bot.set_my_commands(support_commands +
-                                [
-                                    ("realistic", "If people expect to much"),
-                                    ("fps", "Games are demanding"),
-                                    ("banana", "Where update?"),
-                                    ("rant", "Why updates don't have dates"),
-                                    ("offtopic", "Move messages to Off-Topic ➡️"),
-                                ],
-                                scope=BotCommandScopeChatAdministrators(SUPPORT_GROUP),
-                                )
+    context.bot.set_my_commands(support_commands + [
+        ("realistic", "If people expect to much"),
+        ("fps", "Games are demanding"),
+        ("banana", "Where update?"),
+        ("rant", "Why updates don't have dates"),
+        ("offtopic", "Move messages to Off-Topic ➡️"),
+    ], scope=BotCommandScopeChatAdministrators(SUPPORT_GROUP))
 
     context.bot.set_my_commands(
         [
@@ -72,8 +67,7 @@ def reset(update: Update, context: CallbackContext):
             ("gcam", "Latest release and configurations 📷"),
             ("cleaners", "The recommended cleaning apps ♻️"),
         ],
-        scope=BotCommandScopeChat(OFFTOPIC_GROUP),
-    )
+        scope=BotCommandScopeChat(OFFTOPIC_GROUP))
 
     context.bot.set_my_commands(
         [
@@ -84,8 +78,7 @@ def reset(update: Update, context: CallbackContext):
             ("banana", "Where update?"),
             ("support", "Move messages to the Support-Group ➡️"),
         ],
-        scope=BotCommandScopeChatAdministrators(OFFTOPIC_GROUP),
-    )
+        scope=BotCommandScopeChatAdministrators(OFFTOPIC_GROUP))
 
     # add Contribute/About and a specific message to join the groups here
     #  context.bot.set_my_commands([

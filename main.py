@@ -29,7 +29,7 @@ from messages.general import (
     realistic,
     rmp,
     rmx,
-    rules, about
+    rules, about, ban, warn
 )
 from messages.offtopic import (
     move_to_support
@@ -54,7 +54,7 @@ from messages.support import (
     ram,
     rant,
     stable,
-    whatsapp, fooview, swap, charge, miss
+    whatsapp, fooview, swap, charge, miss, eol, rumor
 )
 from postgres import PostgresPersistence
 from utils import remove_message
@@ -98,14 +98,16 @@ if __name__ == "__main__":
         dp.add_handler(MessageHandler(Filters.regex(r"(?i)" + i), remove_message))
 
     # General
+    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmp\d{4})"), rmp))
+    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmx\d{4})"), rmx))
     dp.add_handler(CommandHandler("cleaners", cleaners))
     dp.add_handler(CommandHandler("cool", cool))
     dp.add_handler(CommandHandler("gcam", gcam))
     dp.add_handler(CommandHandler("polls", polls))
     dp.add_handler(CommandHandler("about", about))
     dp.add_handler(CommandHandler("rules", rules))
-    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmp\d{4})"), rmp))
-    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmx\d{4})"), rmx))
+    dp.add_handler(CommandHandler("warn", warn))
+    dp.add_handler(CommandHandler("ban", ban))
 
     # Support
     dp.add_handler(CommandHandler("android11", android11, Filters.chat(config.SUPPORT_GROUP)))
@@ -113,6 +115,9 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler("aod", aod, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("apk", apk, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("ask", ask, Filters.chat(config.SUPPORT_GROUP)))
+    dp.add_handler(CommandHandler("eol", eol, Filters.chat(config.SUPPORT_GROUP)))
+    dp.add_handler(CommandHandler("rumor", rumor, Filters.chat(config.SUPPORT_GROUP)))
+
     dp.add_handler(CommandHandler("battery", battery, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("benchmark", benchmark, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("bug", bug, Filters.chat(config.SUPPORT_GROUP)))
@@ -140,27 +145,14 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler("ram", ram, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("rant", rant, Filters.chat(config.SUPPORT_GROUP)))
 
-    # Offtopic
+    # Offtopics
     dp.add_handler(
         CommandHandler("support", move_to_support, Filters.chat(config.OFFTOPIC_GROUP))
     )
 
     # Control
-    dp.add_handler(
-        CommandHandler(
-            "clear",
-            clear,
-            Filters.chat(config.CONTROL_GROUP) & Filters.user(config.ADMINS),
-        )
-    )
-
-    dp.add_handler(
-        CommandHandler(
-            "reset",
-            reset,
-            Filters.chat(config.CONTROL_GROUP) & Filters.user(config.ADMINS),
-        )
-    )
+    dp.add_handler(CommandHandler("clear", clear, Filters.chat(config.CONTROL_GROUP) & Filters.user(config.ADMINS)))
+    dp.add_handler(CommandHandler("reset", reset, Filters.chat(config.CONTROL_GROUP) & Filters.user(config.ADMINS)))
 
     # Private
     dp.add_handler(MessageHandler(Filters.chat_type.private, private_not_available))

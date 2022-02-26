@@ -206,3 +206,13 @@ def charge(update: Update, context: CallbackContext):
 def miss(update: Update, context: CallbackContext):
     """Handle for /miss."""
     delay_html(update, context, "miss")
+
+
+def eol(update: Update, context: CallbackContext):
+    """Handle for /miss."""
+    delay_html(update, context, "eol")
+
+
+def rumor(update: Update, context: CallbackContext):
+    """Handle for /miss."""
+    delay_html(update, context, "rumor")

@@ -381,3 +381,21 @@ def device(update: Update, context: CallbackContext):
 def about(update: Update, context: CallbackContext):
     """Handle for /about."""
     delay_html(update, context, "about")
+
+
+def warn(update: Update, context: CallbackContext):
+    update.message.delete()
+
+    if update.message.from_user.id in ADMINS or update.message.reply_to_message is not None:
+        warnings = context.bot_data.get(update.message.reply_to_message.from_user.id, 0) + 1
+
+        context.bot_data[update.message.reply_to_message.from_user.id] = warnings
+
+        update.message.reply_to_message.reply_text(f"This user has {warnings} warnings.")
+
+
+def ban(update: Update, context: CallbackContext):
+    update.message.delete()
+
+    if update.message.from_user.id in ADMINS or update.message.reply_to_message is not None:
+        update.message.reply_to_message.reply_text("Banning will be implemented later ;)")

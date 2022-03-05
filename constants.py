@@ -64,7 +64,7 @@ PHONES = {
     3360: ["GT Master Edition (India)"],
     3363: ["GT Master Explorer Edition"],
     3370: ["GT Neo 2"],
-    3511: ['C35']
+    3511: ["C35"]
 }
 
 TABLETS = {2103: ["Pad"]}  # lel

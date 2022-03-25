@@ -5,7 +5,6 @@ These are messages that can appear in both groups or in private.
 
 import re
 import time
-
 from telegram import Update, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
 
@@ -46,14 +45,14 @@ def resolve_model(update: Update, context: CallbackContext):
 
     model = str(re.search(r"rm[xp]\d{4}", update.message.text, re.IGNORECASE).group(0))
 
-    device_type = model[0:3]
+    device_type = model[0:3].lower()
 
     if device_type == "rmx":
         devices = PHONES
     elif device_type == "rmp":
         devices = TABLETS
     else:
-        update.message.reply_text(f"Sorry. The model {model} is invalid.")
+        update.message.reply_text(f"Sorry. The model <b>{model}</b> is invalid.")
         return
 
     model_number = int(model[3:7])
@@ -63,7 +62,7 @@ def resolve_model(update: Update, context: CallbackContext):
         result: list = devices.get(model_number)
 
         if len(result) > 1:
-            text = f"\n\nDepending on the region there's multiple devices known as {model}:\n"
+            text = f"\n\nDepending on the region there's multiple devices known as <b>{model}</b>.\n"
 
             for device_entry in result:
                 text += f"\n· realme {device_entry}"
@@ -88,11 +87,11 @@ def resolve_model(update: Update, context: CallbackContext):
     else:
         context.bot.send_message(
             CONTROL_GROUP,
-            f"#TODO - from user: {update.message.from_user.name}\n\nAdd model {model} to list of devices‼️"
+            f"#TODO - from user: {update.message.from_user.name}\n\nAdd model <b>{model}</b> to list of devices‼️"
         )
 
         update.message.reply_text(
-            f"Sorry {update.message.from_user.name} 🤖\n\nModel <b>{model}</b> was not found.\n\nPlease quote this "
+            f"Sorry {update.message.from_user.name} 🤖\n\nA device with model <b>{model}</b> does not exist in this Bot's database.\n\nPlease quote this "
             f"message and tell me what this device is supposed to be called like.\n\nThe Maintainers of this "
             f"Community-Bot (tap /about for more) will verify it and add it to the Bot soon 😊 "
         )
@@ -316,7 +315,7 @@ def warn(update: Update, context: CallbackContext):
         if warnings <= 3:
             context.bot_data[update.message.reply_to_message.from_user.id] = warnings
         else:
-            warnings='maximum'
+            warnings = 'maximum'
 
         update.message.reply_to_message.reply_text(f"This user has {warnings} warnings.")
 

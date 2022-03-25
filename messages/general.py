@@ -25,16 +25,16 @@ def private_not_available(update: Update, _: CallbackContext):
 
 def cool(update: Update, context: CallbackContext):
     """Handle for /cool."""
-    delay_group(update, context, open("strings/cool.html").read())
+    delay_html("cool")
 
 
 def rules(update: Update, context: CallbackContext):
     """Handle for /rules."""
     if update.message.chat_id == OFFTOPIC_GROUP:
-        delay_group(update, context, open("strings/otrules.html").read())
+        delay_html("otrules")
 
     elif update.message.chat_id == SUPPORT_GROUP:
-        delay_group(update, context, open("strings/onrules.html").read())
+        delay_html("onrules")
 
     else:
         update.message.delete()
@@ -43,9 +43,9 @@ def rules(update: Update, context: CallbackContext):
 def resolve_model(update: Update, context: CallbackContext):
     """Handle for resolving a device model from message texts."""
 
-    model = str(re.search(r"rm[xp]\d{4}", update.message.text, re.IGNORECASE).group(0))
+    model = str(re.search(r"rm[xp]\d{4}", update.message.text, re.IGNORECASE).group(0)).upper()
 
-    device_type = model[0:3].upper()
+    device_type = model[0:3]
 
     if device_type == "RMX":
         devices = PHONES

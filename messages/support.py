@@ -16,37 +16,37 @@ from utils import (
 
 def ask(update: Update, context: CallbackContext):
     """Handle for /ask."""
-    delay_group(update, context, open("strings/ask.html").read())
+    delay_html(update, context, "ask")
 
 
 def commands(update: Update, context: CallbackContext):
     """Handle for /commands."""
-    delay_group(update, context, open("strings/commands.html").read())
+    delay_html(update, context, "commands")
 
 
 def gcam(update: Update, context: CallbackContext):
     """Handle for /gcam."""
-    delay_group(update, context, open("strings/gcam.html").read())
+    delay_html(update, context, "gcam")
 
 
 def cleaners(update: Update, context: CallbackContext):
     """Handle for /cleaners."""
-    delay_group(update, context, open("strings/cleaners.html").read())
+    delay_html(update, context, "cleaners")
 
 
 def aod(update: Update, context: CallbackContext):
     """Handle for /aod."""
-    delay_group_quote(update, context, open("strings/aod.html").read())
+    delay_html(update, context, "aod")
 
 
 def manual(update: Update, context: CallbackContext):
     """Handle for /manual."""
-    delay_group(update, context, open("strings/manual.html").read())
+    delay_html(update, context, "manual")
 
 
 def apk(update: Update, context: CallbackContext):
     """Handle for /apk."""
-    delay_group_quote(update, context, open("strings/apk.html").read())
+    delay_html(update, context, "apk")
 
 
 def form(update: Update, context: CallbackContext):
@@ -57,32 +57,32 @@ def form(update: Update, context: CallbackContext):
 
 def bug(update: Update, context: CallbackContext):
     """Handle for /bug."""
-    delay_group(update, context, open("strings/bug.html").read())
+    delay_html(update, context, "bug")
 
 
 def battery(update: Update, context: CallbackContext):
     """Handle for /battery."""
-    delay_group_quote(update, context, open("strings/battery.html").read())
+    delay_html(update, context, "battery")
 
 
 def stable(update: Update, context: CallbackContext):
     """Handle for /stable."""
-    delay_group_quote(update, context, open("strings/stable.html").read())
+    delay_html(update, context, "stable")
 
 
 def push(update: Update, context: CallbackContext):
     """Handle for /push."""
-    delay_group_quote(update, context, open("strings/push.html").read())
+    delay_html(update, context, "push")
 
 
 def ram(update: Update, context: CallbackContext):
     """Handle for /ram."""
-    delay_group(update, context, open("strings/ram.html").read())
+    delay_html(update, context, "ram")
 
 
 def rant(update: Update, context: CallbackContext):
     """Handle for /rant."""
-    delay_group(update, context, open("strings/rant.html").read())
+    delay_html(update, context, "rant")
 
 
 def whatsapp(update: Update, context: CallbackContext):
@@ -169,38 +169,38 @@ def move_to_offtopic(update: Update, context: CallbackContext):
 
 def android11(update: Update, context: CallbackContext):
     """Handle for /android11."""
-    delay_group_preview(update, context, open("strings/android11.html").read())
+    delay_html(update, context, "android11")
 
 
 def android12(update: Update, context: CallbackContext):
     """Handle for /android12."""
-    # what about Italian and French roadmap?
-    delay_group_preview(update, context, open("strings/android12.html").read())
+    # TODO: what about Italian and French roadmap?
+    delay_html(update, context, "android12")
 
 
 def debloat(update: Update, context: CallbackContext):
     """Handle for /debloat."""
-    delay_group(update, context, open("strings/debloat.html").read())
+    delay_html(update, context, "debloat")
 
 
 def fps(update: Update, context: CallbackContext):
     """Handle for /fps."""
-    delay_group(update, context, open("strings/fps.html").read())
+    delay_html(update, context, "fps")
 
 
 def fooview(update: Update, context: CallbackContext):
     """Handle for /fooview."""
-    delay_group(update, context, open("strings/fooview.html").read())
+    delay_html(update, context, "fooview")
 
 
 def swap(update: Update, context: CallbackContext):
     """Handle for /swap."""
-    delay_group(update, context, open("strings/swap.html").read())
+    delay_html(update, context, "swap")
 
 
 def charge(update: Update, context: CallbackContext):
     """Handle for /charge."""
-    delay_group(update, context, open("strings/charge.html").read())
+    delay_html(update, context, "charge")
 
 
 def miss(update: Update, context: CallbackContext):

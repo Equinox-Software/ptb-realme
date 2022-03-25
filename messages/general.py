@@ -62,13 +62,13 @@ def resolve_model(update: Update, context: CallbackContext):
         result: list = devices.get(model_number)
 
         if len(result) > 1:
-            text = f"\n\nDepending on the region there's multiple devices known as <b>{model}</b>.\n"
+            text = f"Depending on the region there's multiple devices known as <b>{model}</b>.\n"
 
             for device_entry in result:
                 text += f"\n· realme {device_entry}"
 
         else:
-            text = f"\n\nThe phone you mentioned is the <b>realme {result[0]}</b>."
+            text = f"The mentioned model <b>{model}</b> corresponds to <b>realme {result[0]}</b>."
 
         if (
                 update.message.reply_to_message
@@ -79,7 +79,7 @@ def resolve_model(update: Update, context: CallbackContext):
                 update.message.delete()
 
             update.message.reply_to_message.reply_text(
-                f"Hey {update.message.reply_to_message.from_user.name} 🤖\n{text}")
+                f"Hey {update.message.reply_to_message.from_user.name} 🤖\n\n{text}")
 
         else:
             update.message.reply_text(text)
@@ -91,9 +91,9 @@ def resolve_model(update: Update, context: CallbackContext):
         )
 
         update.message.reply_text(
-            f"Sorry {update.message.from_user.name} 🤖\n\nA device with model <b>{model}</b> does not exist in this Bot's database.\n\nPlease quote this "
+            f"Sorry {update.message.from_user.name} 🤖\n\nA device with model <b>{model}</b> does not exist in this Bot's database!\n\nPlease quote this "
             f"message and tell me what this device is supposed to be called like.\n\nThe Maintainers of this "
-            f"Community-Bot (tap /about for more) will verify it and add it to the Bot soon 😊 "
+            f"Community-Bot will verify it and add it to the Bot soon - tap /about for more 😊"
         )
 
 
@@ -129,22 +129,15 @@ def benchmark(update: Update, context: CallbackContext):
 
 def banana(update: Update, _: CallbackContext):
     """Handle for /banana."""
-    update.message.delete()
-
-    if update.message.reply_to_message is not None:
+    if check_quote(update):
         update.message.reply_to_message.reply_photo(
             open("resources/where_update.png", "rb")
         )
 
 
-def realistic(update: Update, _: CallbackContext):
+def realistic(update: Update, context: CallbackContext):
     """Handle for /realistic."""
-    update.message.delete()
-
-    if update.message.reply_to_message is not None:
-        update.message.reply_to_message.reply_text(
-            open("strings/realistic.html").read()
-        )
+    delay_html(update,context, "realistic")
 
 
 def polls(update: Update, context: CallbackContext):

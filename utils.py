@@ -120,12 +120,12 @@ def now():
     """Return current timestamp."""
     return int(round(time.time() * 1000))
 
-def check_admin_quote(update:Update) -> boolean:
+def check_admin_quote(update:Update) -> bool:
     update.message.delete()
 
     return update.message.from_user.id in ADMINS and update.message.reply_to_message is not None
 
-def check_quote(update:Update)-> boolean:
+def check_quote(update:Update)-> bool:
     update.message.delete()
 
     return update.message.reply_to_message is not None

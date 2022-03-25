@@ -9,6 +9,8 @@ import time
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode, Update
 from telegram.ext import CallbackContext
 
+from config import ADMINS
+
 
 def message_button_url(
         update: Update, context: CallbackContext, text, button_text, button_url
@@ -17,7 +19,6 @@ def message_button_url(
     if update.message.reply_to_message:
         return update.message.reply_to_message.reply_text(
             text,
-            ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup.from_button(
                 InlineKeyboardButton(button_text, button_url)
             ),
@@ -26,7 +27,6 @@ def message_button_url(
     return context.bot.send_message(
         update.message.chat_id,
         text,
-        ParseMode.HTML,
         reply_markup=InlineKeyboardMarkup.from_button(
             InlineKeyboardButton(button_text, button_url)
         ),
@@ -50,11 +50,10 @@ def delay_group_preview(update: Update, context: CallbackContext, text: str):
     update.message.delete()
 
     if update.message.reply_to_message:
-        update.message.reply_to_message.reply_text(text, ParseMode.HTML)
+        update.message.reply_to_message.reply_text(text)
     else:
         reply_message = context.bot.send_message(
-            update.message.chat_id, text, ParseMode.HTML
-        )
+            update.message.chat_id, text)
         context.job_queue.run_once(
             delete, 600, reply_message.chat_id, str(reply_message.message_id)
         )
@@ -65,10 +64,10 @@ def delay_group(update: Update, context: CallbackContext, text: str):
     update.message.delete()
 
     if update.message.reply_to_message:
-        update.message.reply_to_message.reply_text(text, ParseMode.HTML, True)
+        update.message.reply_to_message.reply_text(text, disable_web_page_preview=True)
     else:
         reply_message = context.bot.send_message(
-            update.message.chat_id, text, ParseMode.HTML, True
+            update.message.chat_id, text, disable_web_page_preview=True
         )
         context.job_queue.run_once(
             delete, 600, reply_message.chat_id, str(reply_message.message_id)
@@ -97,6 +96,15 @@ def delay_group_quote(update: Update, context: CallbackContext, text: str):
         )
 
 
+def delay_html(update: Update, context: CallbackContext, path: str):
+    if update.message.reply_to_message is not None and update.message.reply_to_message.from_user.name != "Telegram":
+        delay_group(update, context, f"Hey {update.message.reply_to_message.from_user.name} 🤖\n\n" + open(
+            f"strings/{path}.html").read())
+        return
+
+    delay_group(update, context, open(f"strings/{path}.html").read())
+
+
 def delete(context: CallbackContext):
     """Delete given message from job."""
     context.bot.delete_message(str(context.job.context), context.job.name)
@@ -111,3 +119,8 @@ def remove_message(update: Update, _: CallbackContext):
 def now():
     """Return current timestamp."""
     return int(round(time.time() * 1000))
+
+def check_admin_quote(update:Update):
+    update.message.delete()
+
+    return update.message.from_user.id in ADMINS and update.message.reply_to_message is not None

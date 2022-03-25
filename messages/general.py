@@ -11,7 +11,7 @@ from telegram.ext import CallbackContext
 
 from config import VERIFIED_USERS, CONTROL_GROUP, OFFTOPIC_GROUP, SUPPORT_GROUP, ADMINS
 from constants import PHONES, TABLETS
-from utils import delay_group, now, message_button_url
+from utils import delay_group, now, message_button_url, delay_html, check_admin_quote
 
 
 def private_not_available(update: Update, _: CallbackContext):
@@ -41,29 +41,35 @@ def rules(update: Update, context: CallbackContext):
         update.message.delete()
 
 
-def rmx(update: Update, context: CallbackContext):
-    """Handle for /rmx."""
+def resolve_model(update: Update, context: CallbackContext):
+    """Handle for resolving a device model from message texts."""
 
-    model = int(
-        str(re.search(r"rmx\d{4}", update.message.text, re.IGNORECASE).group(0))[3:7]
-    )
+    model = str(re.search(r"rm[xp]\d{4}", update.message.text, re.IGNORECASE).group(0))
 
-    if model in PHONES:
+    device_type = model[0:3]
 
-        result: list = PHONES.get(model)
+    if device_type == "rmx":
+        devices = PHONES
+    elif device_type == "rmp":
+        devices = TABLETS
+    else:
+        update.message.reply_text(f"Sorry. The model {model} is invalid.")
+        return
+
+    model_number = int(model[3:7])
+
+    if model_number in devices:
+
+        result: list = devices.get(model_number)
 
         if len(result) > 1:
-            text = "\n\nDepending on the region there's multiple devices known as RMX{}:\n".format(
-                model
-            )
+            text = f"\n\nDepending on the region there's multiple devices known as {model}:\n"
 
-            for device in result:
-                text += "\n· realme {}".format(device)
+            for device_entry in result:
+                text += f"\n· realme {device_entry}"
 
         else:
-            text = "\n\nThe phone you mentioned is the <b>realme {}</b>.".format(
-                result[0]
-            )
+            text = f"\n\nThe phone you mentioned is the <b>realme {result[0]}</b>."
 
         if (
                 update.message.reply_to_message
@@ -74,7 +80,7 @@ def rmx(update: Update, context: CallbackContext):
                 update.message.delete()
 
             update.message.reply_to_message.reply_text(
-                "Hey {} 🤖".format(update.message.reply_to_message.from_user.name) + text)
+                f"Hey {update.message.reply_to_message.from_user.name} 🤖\n{text}")
 
         else:
             update.message.reply_text(text)
@@ -82,76 +88,14 @@ def rmx(update: Update, context: CallbackContext):
     else:
         context.bot.send_message(
             CONTROL_GROUP,
-            "#TODO - from user: {}"
-            "\n\nAdd RMX {} to list of devices‼️".format(
-                update.message.from_user.name, model
-            )
+            f"#TODO - from user: {update.message.from_user.name}\n\nAdd model {model} to list of devices‼️"
         )
 
         update.message.reply_text(
-            "Sorry {} 🤖"
-            "\n\nModel <b>RMX{}</b> was not found."
-            "\n\nMy human will add it later 😊".format(
-                update.message.from_user.name, model
-            )
+            f"Sorry {update.message.from_user.name} 🤖\n\nModel <b>{model}</b> was not found.\n\nPlease quote this "
+            f"message and tell me what this device is supposed to be called like.\n\nThe Maintainers of this "
+            f"Community-Bot (tap /about for more) will verify it and add it to the Bot soon 😊 "
         )
-
-
-def rmp(update: Update, context: CallbackContext):
-    """Handle for /rmp."""
-
-    model = int(
-        str(re.search(r"rmp\d{4}", update.message.text, re.IGNORECASE).group(0))[3:7]
-    )
-
-    if model in TABLETS:
-
-        result: list = TABLETS.get(
-            model
-        )  # will leave it as a list.. who knows what Realme may do in the future lel
-
-        if len(result) > 1:
-            text = "\n\nDepending on the region there's multiple devices known as RMP{}:\n".format(
-                model
-            )
-
-            for device in result:
-                text += "\n· realme {}".format(device)
-
-        else:
-            text = "\n\nThe phone you mentioned is the <b>realme {}</b>.".format(
-                result[0]
-            )
-
-        if (
-                update.message.reply_to_message
-                and update.message.from_user.id in VERIFIED_USERS
-        ):
-
-            if len(update.message.text) == 7:
-                update.message.delete()
-
-            update.message.reply_to_message.reply_text(
-                "Hey {} 🤖".format(update.message.reply_to_message.from_user.name) + text)
-
-        else:
-            update.message.reply_text(text)
-
-    else:
-        context.bot.send_message(
-            CONTROL_GROUP,
-            "#TODO - from user: {}"
-            "\n\nAdd RMP {} to list of devices‼️".format(
-                update.message.from_user.name, model
-            ),
-        )
-
-        update.message.reply_text(
-            "Sorry {} 🤖"
-            "\n\nModel <b>RMP{}</b> was not found."
-            "\n\nMy human will add it later 😊".format(
-                update.message.from_user.name, model
-            ))
 
 
 def benchmark(update: Update, context: CallbackContext):
@@ -181,24 +125,6 @@ def benchmark(update: Update, context: CallbackContext):
     else:
         delay_group(
             update, context, norm_text.format(update.message.from_user.name, text)
-        )
-
-
-def admin(update: Update, context: CallbackContext):
-    """Handle for /admin."""
-    update.message.delete()
-
-    if update.message.reply_to_message:
-        keyboard = InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("1 hour (test)", callback_data="BAN_1h")],
-                [InlineKeyboardButton("1 day", callback_data="BAN_1d")],
-                [InlineKeyboardButton("remove", callback_data="BAN_remove")],
-            ]
-        )
-
-        update.message.reply_to_message.reply_text(
-            "Choose how long to remove this user:", reply_markup=keyboard
         )
 
 
@@ -380,4 +306,33 @@ def device(update: Update, context: CallbackContext):
 
 def about(update: Update, context: CallbackContext):
     """Handle for /about."""
-    delay_group(update, context, open("strings/about.html").read())
+    delay_html(update, context, "about")
+
+
+def warn(update: Update, context: CallbackContext):
+    if check_admin_quote(update):
+        warnings = context.bot_data.get(update.message.reply_to_message.from_user.id, 0) + 1
+
+        if warnings <= 3:
+            context.bot_data[update.message.reply_to_message.from_user.id] = warnings
+        else:
+            warnings='maximum'
+
+        update.message.reply_to_message.reply_text(f"This user has {warnings} warnings.")
+
+
+def unwarn(update: Update, context: CallbackContext):
+    if check_admin_quote(update):
+        warnings = context.bot_data.get(update.message.reply_to_message.from_user.id, 0) - 1
+
+        if warnings >= 1:
+            context.bot_data[update.message.reply_to_message.from_user.id] = warnings
+        else:
+            warnings = 'no'
+
+        update.message.reply_to_message.reply_text(f"This user has {warnings} warnings.")
+
+
+def ban(update: Update, context: CallbackContext):
+    if check_admin_quote(update):
+        update.message.reply_to_message.reply_text("Banning will be implemented later ;)")

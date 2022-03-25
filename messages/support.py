@@ -10,7 +10,7 @@ from utils import (
     delete,
     delay_group_quote,
     delay_group_button_url,
-    delay_group_preview,
+    delay_group_preview, delay_html,
 )
 
 
@@ -51,7 +51,8 @@ def apk(update: Update, context: CallbackContext):
 
 def form(update: Update, context: CallbackContext):
     """Handle for /form."""
-    delay_group_button_url(update, context, open("strings/form.html").read())
+    delay_group_button_url(update, context, open("strings/form.html").read(), button_text="Access form 📝",
+                           button_url="https://docs.google.com/forms/d/e/1FAIpQLSceGI9ZaNOIb4NN-3UdJ-mbzvbRwulAh2-VGJasy8VU_BLsFA/viewform")
 
 
 def bug(update: Update, context: CallbackContext):
@@ -81,7 +82,7 @@ def ram(update: Update, context: CallbackContext):
 
 def rant(update: Update, context: CallbackContext):
     """Handle for /rant."""
-    delay_group(update, context, open("strings/ram.html").read())
+    delay_group(update, context, open("strings/rant.html").read())
 
 
 def whatsapp(update: Update, context: CallbackContext):
@@ -204,4 +205,14 @@ def charge(update: Update, context: CallbackContext):
 
 def miss(update: Update, context: CallbackContext):
     """Handle for /miss."""
-    delay_group(update, context, open("strings/miss.html").read())
+    delay_html(update, context, "miss")
+
+
+def eol(update: Update, context: CallbackContext):
+    """Handle for /miss."""
+    delay_html(update, context, "eol")
+
+
+def rumor(update: Update, context: CallbackContext):
+    """Handle for /miss."""
+    delay_html(update, context, "rumor")

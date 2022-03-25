@@ -45,11 +45,11 @@ def resolve_model(update: Update, context: CallbackContext):
 
     model = str(re.search(r"rm[xp]\d{4}", update.message.text, re.IGNORECASE).group(0))
 
-    device_type = model[0:3].lower()
+    device_type = model[0:3].capitalize()
 
-    if device_type == "rmx":
+    if device_type == "RMX":
         devices = PHONES
-    elif device_type == "rmp":
+    elif device_type == "RMP":
         devices = TABLETS
     else:
         update.message.reply_text(f"Sorry. The model <b>{model}</b> is invalid.")
@@ -65,10 +65,10 @@ def resolve_model(update: Update, context: CallbackContext):
             text = f"Depending on the region there's multiple devices known as <b>{model}</b>.\n"
 
             for device_entry in result:
-                text += f"\n· realme {device_entry}"
+                text += f"\n· Realme {device_entry}"
 
         else:
-            text = f"The mentioned model <b>{model}</b> corresponds to <b>realme {result[0]}</b>."
+            text = f"The mentioned model <b>{model}</b> corresponds to the <b>Realme {result[0]}</b>."
 
         if (
                 update.message.reply_to_message

@@ -45,7 +45,7 @@ def resolve_model(update: Update, context: CallbackContext):
 
     model = str(re.search(r"rm[xp]\d{4}", update.message.text, re.IGNORECASE).group(0))
 
-    device_type = model[0:3].capitalize()
+    device_type = model[0:3].upper()
 
     if device_type == "RMX":
         devices = PHONES

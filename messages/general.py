@@ -274,7 +274,7 @@ def device(update: Update, context: CallbackContext):
     if check_admin_quote(update):
         if len(context.args) == 0:
 
-            user_devices = get_user_info(update, context, DEVICES, None)
+            user_devices = get_user_info(update, context, DEVICES)
 
             # TODO: maybe deprecate it in favor of /info
             if user_devices is None:

@@ -10,7 +10,6 @@ from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode, Upda
 from telegram.ext import CallbackContext
 
 from config import ADMINS
-from constants import WARNINGS, DEVICES
 
 
 def message_button_url(
@@ -128,22 +127,25 @@ def check_admin_quote(update: Update) -> bool:
     return update.message.from_user.id in ADMINS and update.message.reply_to_message is not None
 
 
+def check_admin_quote_not_admin(update: Update) -> bool:
+    update.message.delete()
+
+    return update.message.from_user.id in ADMINS and update.message.reply_to_message is not None and update.message.reply_to_message.from_user.id not in ADMINS
+
+
 def check_quote(update: Update) -> bool:
     update.message.delete()
 
     return update.message.reply_to_message is not None
 
 
-def get_user_info(update: Update, context: CallbackContext, key: str = None) -> any:
-    info = context.bot_data.get(str(update.message.reply_to_message.from_user.id), {WARNINGS: 0, DEVICES: []})
-
-    print(info)
+def get_user_info(update: Update, context: CallbackContext, key: str = None, default: any = None) -> any:
+    info = context.bot_data.get(str(update.message.reply_to_message.from_user.id), {})
 
     if key is None:
         return info
 
-    if info is not None:
-        return info.get(key)
+    info.get(key, default)
 
 
 def set_user_info(update: Update, context: CallbackContext, value: any, key: str = None):
@@ -152,8 +154,6 @@ def set_user_info(update: Update, context: CallbackContext, value: any, key: str
         return
 
     if update.message.reply_to_message.from_user.id not in context.bot_data:
-        context.bot_data[str(update.message.reply_to_message.from_user.id)] = {WARNINGS: 0, DEVICES: []}
+        context.bot_data[str(update.message.reply_to_message.from_user.id)] = {}
 
     context.bot_data[str(update.message.reply_to_message.from_user.id)][key] = value
-
-    print(key,value, context.bot_data[str(update.message.reply_to_message.from_user.id)][key])

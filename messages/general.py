@@ -12,7 +12,7 @@ from telegram.ext import CallbackContext
 from config import VERIFIED_USERS, CONTROL_GROUP, OFFTOPIC_GROUP, SUPPORT_GROUP, ADMINS
 from constants import PHONES, TABLETS, DEVICES, WARNINGS
 from utils import delay_group, now, message_button_url, delay_html, check_admin_quote, get_user_info, set_user_info, \
-    check_quote
+    check_quote, check_admin_quote_not_admin
 
 
 def private_not_available(update: Update, _: CallbackContext):
@@ -271,17 +271,13 @@ def polls(update: Update, context: CallbackContext):
 
 def device(update: Update, context: CallbackContext):
     """Handle for /device."""
-    update.message.delete()
-
-    if (
-            update.message.from_user.id in ADMINS
-            and update.message.reply_to_message is not None
-    ):
-
+    if check_admin_quote(update):
         if len(context.args) == 0:
 
+            user_devices = get_user_info(update, context, DEVICES, None)
+
             # TODO: maybe deprecate it in favor of /info
-            if len(get_user_info(update, context, DEVICES)) == 0:
+            if user_devices is None:
                 update.message.reply_to_message.reply_text(
                     "This user has no devices saved."
                 )
@@ -289,9 +285,7 @@ def device(update: Update, context: CallbackContext):
             else:
                 result = "This user has the following devices: \n"
 
-                result += "· ".join(
-                    get_user_info(update, context, DEVICES)
-                )
+                result += "· ".join(user_devices)
 
                 update.message.reply_to_message.reply_text(result)
 
@@ -305,8 +299,8 @@ def about(update: Update, context: CallbackContext):
 
 
 def warn(update: Update, context: CallbackContext):
-    if check_admin_quote(update):
-        warnings = get_user_info(update, context, WARNINGS) + 1
+    if check_admin_quote_not_admin(update):
+        warnings = get_user_info(update, context, WARNINGS, 0) + 1
 
         if warnings <= 3:
             set_user_info(update, context, warnings, WARNINGS)
@@ -317,8 +311,8 @@ def warn(update: Update, context: CallbackContext):
 
 
 def unwarn(update: Update, context: CallbackContext):
-    if check_admin_quote(update):
-        warnings = get_user_info(update, context, WARNINGS) - 1
+    if check_admin_quote_not_admin(update):
+        warnings = get_user_info(update, context, WARNINGS, 0) - 1
 
         if warnings >= 1:
             set_user_info(update, context, warnings, WARNINGS)
@@ -329,7 +323,7 @@ def unwarn(update: Update, context: CallbackContext):
 
 
 def ban(update: Update, context: CallbackContext):
-    if check_admin_quote(update):
+    if check_admin_quote_not_admin(update):
         update.message.reply_to_message.reply_text("Banning will be implemented later ;)")
 
 

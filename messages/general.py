@@ -11,7 +11,8 @@ from telegram.ext import CallbackContext
 
 from config import VERIFIED_USERS, CONTROL_GROUP, OFFTOPIC_GROUP, SUPPORT_GROUP, ADMINS
 from constants import PHONES, TABLETS, DEVICES, WARNINGS
-from utils import delay_group, now, message_button_url, delay_html, check_admin_quote, get_user_info, set_user_info
+from utils import delay_group, now, message_button_url, delay_html, check_admin_quote, get_user_info, set_user_info, \
+    check_quote
 
 
 def private_not_available(update: Update, _: CallbackContext):
@@ -309,6 +310,7 @@ def warn(update: Update, context: CallbackContext):
 
         if warnings <= 3:
             set_user_info(update, context, "warnings", warnings)
+            print(warnings, get_user_info(update, context, WARNINGS))
         else:
             warnings = 'maximum'
 

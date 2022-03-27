@@ -300,7 +300,7 @@ def about(update: Update, context: CallbackContext):
 
 def warn(update: Update, context: CallbackContext):
     if check_admin_quote_not_admin(update):
-        warnings = get_user_info(update, context, WARNINGS, 0) + 1
+        warnings = get_user_info(update, context, WARNINGS) + 1
 
         if warnings <= 3:
             set_user_info(update, context, warnings, WARNINGS)
@@ -312,7 +312,7 @@ def warn(update: Update, context: CallbackContext):
 
 def unwarn(update: Update, context: CallbackContext):
     if check_admin_quote_not_admin(update):
-        warnings = get_user_info(update, context, WARNINGS, 0) - 1
+        warnings = get_user_info(update, context, WARNINGS) - 1
 
         if warnings >= 1:
             set_user_info(update, context, warnings, WARNINGS)

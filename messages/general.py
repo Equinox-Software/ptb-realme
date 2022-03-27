@@ -149,7 +149,7 @@ def polls(update: Update, context: CallbackContext):
 
     previous_timestamp = context.bot_data.get("previous_timestamp", current_time)
     previous_link = context.bot_data.get(
-        "previous_link", "https://t.me/realme_support/135222"
+        "previous_link", "https://t.me/realme_support/263211"
     )
 
     if (
@@ -310,7 +310,6 @@ def warn(update: Update, context: CallbackContext):
 
         if warnings <= 3:
             set_user_info(update, context, warnings, WARNINGS)
-            print(warnings, get_user_info(update, context, WARNINGS))
         else:
             warnings = 'maximum'
 
@@ -348,7 +347,7 @@ def info(update: Update, context: CallbackContext):
             response += "Devices:\n"
 
             for d in info_dict[DEVICES]:
-                response += f"\n- {d}"
+                response += f"\n· {d}"
 
             response += "\n"
 

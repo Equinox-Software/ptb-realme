@@ -150,8 +150,6 @@ def set_user_info(update: Update, context: CallbackContext, value: any, key: str
         return
 
     if update.message.reply_to_message.from_user.id not in context.bot_data:
-        print("not in")
         context.bot_data[update.message.reply_to_message.from_user.id] = {WARNINGS: 0, DEVICES: []}
 
-    print("setting value",context.bot_data[update.message.reply_to_message.from_user.id])
     context.bot_data[update.message.reply_to_message.from_user.id][key] = value

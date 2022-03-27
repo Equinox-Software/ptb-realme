@@ -133,7 +133,7 @@ def check_quote(update: Update) -> bool:
     return update.message.reply_to_message is not None
 
 
-def get_user_info(update: Update, context: CallbackContext, key: str = None):
+def get_user_info(update: Update, context: CallbackContext, key: str = None) -> any:
     info = context.bot_data.get(update.message.reply_to_message.from_user.id, dict())
 
     if key is None:

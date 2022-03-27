@@ -143,6 +143,8 @@ def check_quote(update: Update) -> bool:
 def get_user_info(update: Update, context: CallbackContext, key: str = None) -> any:
     info = context.bot_data.get(str(update.message.reply_to_message.from_user.id), {WARNINGS: 0, DEVICES: []})
 
+    print(info, key)
+
     if key is None:
         return info
 

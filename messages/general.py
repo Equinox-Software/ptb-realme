@@ -309,7 +309,7 @@ def warn(update: Update, context: CallbackContext):
         warnings = get_user_info(update, context, WARNINGS) + 1
 
         if warnings <= 3:
-            set_user_info(update, context, "warnings", warnings)
+            set_user_info(update, context, warnings, WARNINGS)
             print(warnings, get_user_info(update, context, WARNINGS))
         else:
             warnings = 'maximum'
@@ -322,7 +322,7 @@ def unwarn(update: Update, context: CallbackContext):
         warnings = get_user_info(update, context, WARNINGS) - 1
 
         if warnings >= 1:
-            set_user_info(update, context, "warnings", warnings)
+            set_user_info(update, context, warnings, WARNINGS)
         else:
             warnings = 'no'
 

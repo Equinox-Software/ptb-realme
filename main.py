@@ -27,9 +27,7 @@ from messages.general import (
     polls,
     private_not_available,
     realistic,
-    rmp,
-    rmx,
-    rules, about, ban, warn
+    rules, about, ban, warn, unwarn, resolve_model
 )
 from messages.offtopic import (
     move_to_support
@@ -98,8 +96,7 @@ if __name__ == "__main__":
         dp.add_handler(MessageHandler(Filters.regex(r"(?i)" + i), remove_message))
 
     # General
-    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmp\d{4})"), rmp))
-    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rmx\d{4})"), rmx))
+    dp.add_handler(MessageHandler(Filters.regex(r"(?i)(?:(?!/)rm[xp]\d{4})"), resolve_model))
     dp.add_handler(CommandHandler("cleaners", cleaners))
     dp.add_handler(CommandHandler("cool", cool))
     dp.add_handler(CommandHandler("gcam", gcam))
@@ -107,6 +104,7 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler("about", about))
     dp.add_handler(CommandHandler("rules", rules))
     dp.add_handler(CommandHandler("warn", warn))
+    dp.add_handler(CommandHandler("unwarn", unwarn))
     dp.add_handler(CommandHandler("ban", ban))
 
     # Support

@@ -9,6 +9,8 @@ import time
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode, Update
 from telegram.ext import CallbackContext
 
+from config import ADMINS
+
 
 def message_button_url(
         update: Update, context: CallbackContext, text, button_text, button_url
@@ -117,3 +119,13 @@ def remove_message(update: Update, _: CallbackContext):
 def now():
     """Return current timestamp."""
     return int(round(time.time() * 1000))
+
+def check_admin_quote(update:Update) -> bool:
+    update.message.delete()
+
+    return update.message.from_user.id in ADMINS and update.message.reply_to_message is not None
+
+def check_quote(update:Update)-> bool:
+    update.message.delete()
+
+    return update.message.reply_to_message is not None

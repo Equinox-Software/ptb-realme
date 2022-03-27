@@ -67,6 +67,6 @@ PHONES = {
     3511: ["C35"]
 }
 
-TABLETS = {2103: ["Pad"]}  # lel
+TABLETS = {2103: ["Pad"]}
 
 FORBIDDEN_TEXT = ("/victims", "/infect", "#icon", "CoronaVirusRobot", "#icons")

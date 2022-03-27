@@ -10,6 +10,7 @@ from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode, Upda
 from telegram.ext import CallbackContext
 
 from config import ADMINS
+from constants import WARNINGS, DEVICES
 
 
 def message_button_url(
@@ -134,7 +135,7 @@ def check_quote(update: Update) -> bool:
 
 
 def get_user_info(update: Update, context: CallbackContext, key: str = None) -> any:
-    info = context.bot_data.get(update.message.reply_to_message.from_user.id, dict())
+    info = context.bot_data.get(update.message.reply_to_message.from_user.id, {WARNINGS: 0, DEVICES: []})
 
     if key is None:
         return info

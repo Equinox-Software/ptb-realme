@@ -135,7 +135,7 @@ def check_quote(update: Update) -> bool:
 
 
 def get_user_info(update: Update, context: CallbackContext, key: str = None) -> any:
-    info = context.bot_data.get(update.message.reply_to_message.from_user.id) #, {WARNINGS: 0, DEVICES: []}
+    info = context.bot_data.get(str(update.message.reply_to_message.from_user.id), {WARNINGS: 0, DEVICES: []})
 
     print(info)
 
@@ -148,12 +148,12 @@ def get_user_info(update: Update, context: CallbackContext, key: str = None) -> 
 
 def set_user_info(update: Update, context: CallbackContext, value: any, key: str = None):
     if key is None:
-        context.bot_data[update.message.reply_to_message.from_user.id] = value
+        context.bot_data[str(update.message.reply_to_message.from_user.id)] = value
         return
 
     if update.message.reply_to_message.from_user.id not in context.bot_data:
-        context.bot_data[update.message.reply_to_message.from_user.id] = {WARNINGS: 0, DEVICES: []}
+        context.bot_data[str(update.message.reply_to_message.from_user.id)] = {WARNINGS: 0, DEVICES: []}
 
-    context.bot_data[update.message.reply_to_message.from_user.id][key] = value
+    context.bot_data[str(update.message.reply_to_message.from_user.id)][key] = value
 
-    print(key,value, context.bot_data[update.message.reply_to_message.from_user.id][key])
+    print(key,value, context.bot_data[str(update.message.reply_to_message.from_user.id)][key])

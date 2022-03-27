@@ -8,7 +8,6 @@ from utils import (
     delay_group,
     message_button_url,
     delete,
-    delay_group_quote,
     delay_group_button_url,
     delay_group_preview, delay_html,
 )
@@ -167,15 +166,10 @@ def move_to_offtopic(update: Update, context: CallbackContext):
         )
 
 
-def android11(update: Update, context: CallbackContext):
-    """Handle for /android11."""
-    delay_html(update, context, "android11")
-
-
 def android12(update: Update, context: CallbackContext):
     """Handle for /android12."""
     # TODO: what about Italian and French roadmap?
-    delay_html(update, context, "android12")
+    delay_group_preview(update, context, open("strings/android12.html").read())
 
 
 def debloat(update: Update, context: CallbackContext):

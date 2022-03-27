@@ -351,7 +351,7 @@ def info(update: Update, context: CallbackContext):
             if info_dict[WARNINGS] == 0:
                 response += "None"
             else:
-                response += info_dict[WARNINGS]
+                response += str(info_dict[WARNINGS])
 
         # maybe also add user's region?
 

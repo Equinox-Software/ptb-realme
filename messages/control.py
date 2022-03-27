@@ -62,9 +62,8 @@ def reset(update: Update, context: CallbackContext):
         ("fps", "Games are demanding"),
         ("banana", "Where update?"),
         ("rant", "Why updates don't have dates"),
-        ("offtopic", "Move messages to Off-Topic ➡️"),
-        admin_commands
-    ], scope=BotCommandScopeChatAdministrators(SUPPORT_GROUP))
+        ("offtopic", "Move messages to Off-Topic ➡️")
+    ] + admin_commands, scope=BotCommandScopeChatAdministrators(SUPPORT_GROUP))
 
     offtopic_commands = [
         ("rules", "Show this group's rules 📜"),
@@ -75,14 +74,10 @@ def reset(update: Update, context: CallbackContext):
 
     context.bot.set_my_commands(offtopic_commands, scope=BotCommandScopeChat(OFFTOPIC_GROUP))
 
-    context.bot.set_my_commands(
-        [
-            offtopic_commands,
-            ("banana", "Where update?"),
-            ("support", "Move messages to the Support-Group ➡️"),
-            admin_commands
-        ],
-        scope=BotCommandScopeChatAdministrators(OFFTOPIC_GROUP))
+    context.bot.set_my_commands(offtopic_commands + [
+        ("banana", "Where update?"),
+        ("support", "Move messages to the Support-Group ➡️")
+    ] + admin_commands, scope=BotCommandScopeChatAdministrators(OFFTOPIC_GROUP))
 
     # add Contribute/About and a specific message to join the groups here
     #  context.bot.set_my_commands([

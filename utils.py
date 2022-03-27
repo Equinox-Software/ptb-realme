@@ -145,6 +145,6 @@ def get_user_info(update: Update, context: CallbackContext, key: str = None) -> 
 
 def set_user_info(update: Update, context: CallbackContext, value: any, key: str = None):
     if key is None:
-        context.bot_data[update.message.reply_to_message.from_user.id] = value
+        context.bot_data[update.message.reply_to_message.from_user.id, {WARNINGS: 0, DEVICES: []}] = value
     else:
-        context.bot_data[update.message.reply_to_message.from_user.id][key] = value
+        context.bot_data.get(update.message.reply_to_message.from_user.id, {WARNINGS: 0, DEVICES: []})[key] = value

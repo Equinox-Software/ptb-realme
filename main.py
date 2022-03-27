@@ -27,13 +27,12 @@ from messages.general import (
     polls,
     private_not_available,
     realistic,
-    rules, about, ban, warn, unwarn, resolve_model
+    rules, about, ban, warn, unwarn, resolve_model, info
 )
 from messages.offtopic import (
     move_to_support
 )
 from messages.support import (
-    android11,
     android12,
     aod,
     apk,
@@ -104,11 +103,11 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler("about", about))
     dp.add_handler(CommandHandler("rules", rules))
     dp.add_handler(CommandHandler("warn", warn))
+    dp.addhandler(CommandHandler("info", info))
     dp.add_handler(CommandHandler("unwarn", unwarn))
     dp.add_handler(CommandHandler("ban", ban))
 
     # Support
-    dp.add_handler(CommandHandler("android11", android11, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("android12", android12, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("aod", aod, Filters.chat(config.SUPPORT_GROUP)))
     dp.add_handler(CommandHandler("apk", apk, Filters.chat(config.SUPPORT_GROUP)))

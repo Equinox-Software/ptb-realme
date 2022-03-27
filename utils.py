@@ -120,12 +120,30 @@ def now():
     """Return current timestamp."""
     return int(round(time.time() * 1000))
 
-def check_admin_quote(update:Update) -> bool:
+
+def check_admin_quote(update: Update) -> bool:
     update.message.delete()
 
     return update.message.from_user.id in ADMINS and update.message.reply_to_message is not None
 
-def check_quote(update:Update)-> bool:
+
+def check_quote(update: Update) -> bool:
     update.message.delete()
 
     return update.message.reply_to_message is not None
+
+
+def get_user_info(update: Update, context: CallbackContext, key: str = None):
+    info = context.bot_data.get(update.message.reply_to_message.from_user.id, dict())
+
+    if key is None:
+        return info
+
+    return info.get(key)
+
+
+def set_user_info(update: Update, context: CallbackContext, value: any, key: str = None):
+    if key is None:
+        context.bot_data[update.message.reply_to_message.from_user.id] = value
+    else:
+        context.bot_data[update.message.reply_to_message.from_user.id][key] = value

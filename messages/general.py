@@ -5,12 +5,13 @@ These are messages that can appear in both groups or in private.
 
 import re
 import time
+
 from telegram import Update, ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext
 
 from config import VERIFIED_USERS, CONTROL_GROUP, OFFTOPIC_GROUP, SUPPORT_GROUP, ADMINS
-from constants import PHONES, TABLETS
-from utils import delay_group, now, message_button_url, delay_html, check_admin_quote
+from constants import PHONES, TABLETS, DEVICES, WARNINGS
+from utils import delay_group, now, message_button_url, delay_html, check_admin_quote, get_user_info, set_user_info
 
 
 def private_not_available(update: Update, _: CallbackContext):
@@ -25,16 +26,16 @@ def private_not_available(update: Update, _: CallbackContext):
 
 def cool(update: Update, context: CallbackContext):
     """Handle for /cool."""
-    delay_html("cool")
+    delay_html(update, context, "cool")
 
 
 def rules(update: Update, context: CallbackContext):
     """Handle for /rules."""
     if update.message.chat_id == OFFTOPIC_GROUP:
-        delay_html("otrules")
+        delay_html(update, context, "otrules")
 
     elif update.message.chat_id == SUPPORT_GROUP:
-        delay_html("onrules")
+        delay_html(update, context, "onrules")
 
     else:
         update.message.delete()
@@ -137,7 +138,7 @@ def banana(update: Update, _: CallbackContext):
 
 def realistic(update: Update, context: CallbackContext):
     """Handle for /realistic."""
-    delay_html(update,context, "realistic")
+    delay_html(update, context, "realistic")
 
 
 def polls(update: Update, context: CallbackContext):
@@ -278,7 +279,8 @@ def device(update: Update, context: CallbackContext):
 
         if len(context.args) == 0:
 
-            if len(context.bot_data[update.message.reply_to_message.from_user.id]) == 0:
+            # TODO: maybe deprecate it in favor of /info
+            if len(get_user_info(update, context, DEVICES)) == 0:
                 update.message.reply_to_message.reply_text(
                     "This user has no devices saved."
                 )
@@ -287,13 +289,13 @@ def device(update: Update, context: CallbackContext):
                 result = "This user has the following devices: \n"
 
                 result += "· ".join(
-                    context.bot_data[update.message.reply_to_message.from_user.id]
+                    get_user_info(update, context, DEVICES)
                 )
 
                 update.message.reply_to_message.reply_text(result)
 
         else:
-            context.bot_data[update.message.reply_to_message.from_user.id] = context.args
+            set_user_info(update, context, DEVICES, context.args)
 
 
 def about(update: Update, context: CallbackContext):
@@ -303,10 +305,10 @@ def about(update: Update, context: CallbackContext):
 
 def warn(update: Update, context: CallbackContext):
     if check_admin_quote(update):
-        warnings = context.bot_data.get(update.message.reply_to_message.from_user.id, 0) + 1
+        warnings = get_user_info(update, context, WARNINGS) + 1
 
         if warnings <= 3:
-            context.bot_data[update.message.reply_to_message.from_user.id] = warnings
+            set_user_info(update, context, "warnings", warnings)
         else:
             warnings = 'maximum'
 
@@ -315,10 +317,10 @@ def warn(update: Update, context: CallbackContext):
 
 def unwarn(update: Update, context: CallbackContext):
     if check_admin_quote(update):
-        warnings = context.bot_data.get(update.message.reply_to_message.from_user.id, 0) - 1
+        warnings = get_user_info(update, context, WARNINGS) - 1
 
         if warnings >= 1:
-            context.bot_data[update.message.reply_to_message.from_user.id] = warnings
+            set_user_info(update, context, "warnings", warnings)
         else:
             warnings = 'no'
 
@@ -328,3 +330,30 @@ def unwarn(update: Update, context: CallbackContext):
 def ban(update: Update, context: CallbackContext):
     if check_admin_quote(update):
         update.message.reply_to_message.reply_text("Banning will be implemented later ;)")
+
+
+def info(update: Update, context: CallbackContext):
+    if check_admin_quote(update):
+        info_dict = get_user_info(update, context)
+
+        response = f"Information about this user:\n\n"
+
+        if DEVICES in info_dict:
+            response += "Devices:\n"
+
+            for d in info_dict[DEVICES]:
+                response += f"\n- {d}"
+
+            response += "\n"
+
+        if WARNINGS in info_dict:
+            response += "Warnings: "
+
+            if info_dict[WARNINGS] == 0:
+                response += "None"
+            else:
+                response += info_dict[WARNINGS]
+
+        # maybe also add user's region?
+
+        update.message.reply_to_message.reply_text(response)

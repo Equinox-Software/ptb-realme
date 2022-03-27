@@ -70,3 +70,7 @@ PHONES = {
 TABLETS = {2103: ["Pad"]}
 
 FORBIDDEN_TEXT = ("/victims", "/infect", "#icon", "CoronaVirusRobot", "#icons")
+
+# keys for user info
+WARNINGS = "warnings"
+DEVICES = "devices"

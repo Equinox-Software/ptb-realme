@@ -336,7 +336,7 @@ def info(update: Update, context: CallbackContext):
     if check_admin_quote(update):
         info_dict = get_user_info(update, context)
 
-        if info_dict.__len__ == 0:
+        if len(info_dict) == 0:
             update.message.reply_to_message.reply_text("There is no information for this user saved.")
             return
 

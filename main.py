@@ -103,7 +103,7 @@ if __name__ == "__main__":
     dp.add_handler(CommandHandler("about", about))
     dp.add_handler(CommandHandler("rules", rules))
     dp.add_handler(CommandHandler("warn", warn))
-    dp.addhandler(CommandHandler("info", info))
+    dp.add_handler(CommandHandler("info", info))
     dp.add_handler(CommandHandler("unwarn", unwarn))
     dp.add_handler(CommandHandler("ban", ban))
 

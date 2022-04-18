@@ -62,7 +62,7 @@ PHONES = {
     3242: ["Narzo 30 5G"],
     3350: ["GT Neo Flash Edition"],
     3360: ["GT Master Edition (India)"],
-    3363: ["GT Master Explorer Edition"],
+    3363: ["GT Master Edition"],
     3370: ["GT Neo 2"],
     3511: ["C35"]
 }

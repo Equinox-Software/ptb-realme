@@ -203,10 +203,10 @@ def miss(update: Update, context: CallbackContext):
 
 
 def eol(update: Update, context: CallbackContext):
-    """Handle for /miss."""
+    """Handle for /eol."""
     delay_html(update, context, "eol")
 
 
 def rumor(update: Update, context: CallbackContext):
-    """Handle for /miss."""
+    """Handle for /rumor."""
     delay_html(update, context, "rumor")

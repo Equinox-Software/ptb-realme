@@ -62,7 +62,7 @@ def delay_group_preview(update: Update, context: CallbackContext, text: str):
 
 def delay_group(update: Update, context: CallbackContext, text: str):
     """Send a delayed message to group."""
-    update.message.delete()
+    #update.message.delete()
 
     if update.message.reply_to_message:
         update.message.reply_to_message.reply_text(text, disable_web_page_preview=True)
